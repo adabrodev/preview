@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>adabro.ai — Small Companies & Solo</title>
+    <link rel="icon" type="image/x-icon" href="https://images.squarespace-cdn.com/content/v1/6702a0ccf51e716b1eaf868d/35f375b1-5445-4110-872d-31448d40979e/favicon.ico?format=100w"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100;0,400;0,600;0,700;1,400&family=Poppins:ital,wght@0,300;0,400;0,600;0,700;1,400">
+    <style>
+        :root {
+            --max-width: 1200px;
+            --gutter: 4vw;
+            --font-heading: 'Urbanist', sans-serif;
+            --font-body: 'Poppins', sans-serif;
+            --color-black: #1a1a1a;
+            --color-white: #ffffff;
+            --color-offwhite: #f7f5f2;
+            --color-gray: #666;
+            --color-light-gray: #999;
+            --color-accent: #8b6cc1;
+            --color-segment: #7a9a4c;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--color-black);
+            background: var(--color-white);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ─── LANG SWITCHER ─── */
+        .lang-bar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            z-index: 200;
+            display: flex;
+            gap: 2px;
+            padding: 8px 16px;
+            background: rgba(0,0,0,0.7);
+            border-radius: 0 0 0 6px;
+        }
+        .lang-btn {
+            font-family: var(--font-body);
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            padding: 4px 10px;
+            border: 1px solid rgba(255,255,255,0.3);
+            background: transparent;
+            color: rgba(255,255,255,0.6);
+            cursor: pointer;
+            border-radius: 2px;
+            transition: all 0.2s;
+        }
+        .lang-btn:hover { color: #fff; border-color: rgba(255,255,255,0.6); }
+        .lang-btn.active { background: rgba(255,255,255,0.15); color: #fff; border-color: rgba(255,255,255,0.6); }
+
+        /* Language visibility */
+        .lang-fr, .lang-pl { display: none; }
+        body.fr .lang-en { display: none; }
+        body.fr .lang-fr { display: inline; }
+        body.pl .lang-en { display: none; }
+        body.pl .lang-pl { display: inline; }
+        .lang-fr-block, .lang-pl-block { display: none; }
+        body.fr .lang-fr-block { display: block; }
+        body.fr .lang-en-block { display: none; }
+        body.pl .lang-pl-block { display: block; }
+        body.pl .lang-en-block { display: none; }
+
+        /* ─── BACK NAV ─── */
+        .back-nav {
+            padding: 20px var(--gutter);
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+
+        .back-nav a {
+            font-family: var(--font-body);
+            font-size: 0.8rem;
+            font-weight: 400;
+            color: var(--color-light-gray);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .back-nav a:hover { color: var(--color-black); }
+
+        /* ─── SEGMENT HERO ─── */
+        .segment-hero {
+            padding: 60px var(--gutter) 60px;
+            text-align: center;
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+
+        .segment-label {
+            font-family: var(--font-body);
+            font-size: 0.6rem;
+            font-weight: 700;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--color-segment);
+            margin-bottom: 16px;
+        }
+
+        .segment-hero h1 {
+            font-family: var(--font-heading);
+            font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .segment-hero .pitch {
+            font-size: 1rem;
+            font-weight: 300;
+            color: var(--color-gray);
+            max-width: 600px;
+            margin: 0 auto 16px;
+            line-height: 1.8;
+        }
+
+        .segment-hero .closer {
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #2a1f3d;
+        }
+
+        /* ─── SOLO MODEL ─── */
+        .solo-model {
+            background: var(--color-offwhite);
+            padding: 60px var(--gutter);
+        }
+
+        .solo-model-inner {
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .solo-model h2 {
+            font-family: var(--font-heading);
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+
+        .solo-steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            text-align: center;
+            max-width: 800px;
+            margin: 40px auto 0;
+        }
+
+        .solo-step .step-num {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--color-segment);
+            margin-bottom: 8px;
+        }
+
+        .solo-step h3 {
+            font-family: var(--font-heading);
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .solo-step p {
+            font-size: 0.8rem;
+            font-weight: 300;
+            color: var(--color-gray);
+            line-height: 1.6;
+        }
+
+        /* ─── PERSONA OVERVIEW ─── */
+        .persona-overview {
+            padding: 60px var(--gutter);
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+
+        .persona-overview h2 {
+            font-family: var(--font-heading);
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .persona-overview .section-sub {
+            font-size: 0.85rem;
+            color: var(--color-light-gray);
+            margin-bottom: 40px;
+        }
+
+        .overview-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .overview-card {
+            border: 1px solid #ece9e4;
+            padding: 28px 24px;
+            border-radius: 2px;
+        }
+
+        .overview-card h3 {
+            font-family: var(--font-heading);
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .overview-card p {
+            font-size: 0.82rem;
+            font-weight: 300;
+            color: var(--color-gray);
+            line-height: 1.6;
+        }
+
+        /* ─── PERSONAS ─── */
+        .personas-section {
+            padding: 60px var(--gutter);
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+
+        .personas-section h2 {
+            font-family: var(--font-heading);
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .personas-section .section-sub {
+            font-size: 0.85rem;
+            color: var(--color-light-gray);
+            margin-bottom: 40px;
+        }
+
+        .persona-card {
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            gap: 0;
+            border: 1px solid #ece9e4;
+            margin-bottom: 24px;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .persona-sidebar {
+            padding: 32px 28px;
+            border-right: 1px solid #ece9e4;
+        }
+
+        .persona-sidebar h3 {
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .persona-sidebar .persona-role {
+            font-size: 0.78rem;
+            font-weight: 300;
+            color: var(--color-light-gray);
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .persona-sidebar .persona-example {
+            font-size: 0.72rem;
+            font-weight: 400;
+            color: var(--color-gray);
+            padding-top: 16px;
+            border-top: 1px solid #eee;
+        }
+
+        .persona-body {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+        }
+
+        .persona-pain, .persona-offer { padding: 28px; }
+
+        .persona-pain {
+            border-right: 1px solid #ece9e4;
+            background: #fdfcfa;
+        }
+
+        .persona-pain h4, .persona-offer h4 {
+            font-family: var(--font-body);
+            font-size: 0.62rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        .persona-pain h4 { color: #c0392b; }
+        .persona-offer h4 { color: var(--color-accent); }
+
+        .persona-pain ul, .persona-offer ul { list-style: none; padding: 0; }
+
+        .persona-pain li, .persona-offer li {
+            font-size: 0.82rem;
+            font-weight: 300;
+            color: var(--color-gray);
+            line-height: 1.65;
+            padding: 6px 0;
+            padding-left: 16px;
+            position: relative;
+        }
+
+        .persona-pain li::before {
+            content: "—";
+            position: absolute;
+            left: 0;
+            color: #ddd;
+        }
+
+        .persona-offer li::before {
+            content: "\2192";
+            position: absolute;
+            left: 0;
+            color: var(--color-accent);
+        }
+
+        /* ─── CTA ─── */
+        .section-cta {
+            text-align: center;
+            padding: 64px var(--gutter);
+            background: var(--color-white);
+        }
+
+        .section-cta h2 {
+            font-family: var(--font-heading);
+            font-size: clamp(1.4rem, 2.5vw, 2rem);
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .contact-sub {
+            font-size: 0.88rem;
+            font-weight: 300;
+            color: var(--color-light-gray);
+            margin-bottom: 32px;
+        }
+
+        .contact-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn-wa, .btn-email {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-decoration: none;
+            padding: 16px 36px;
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+
+        .btn-wa {
+            background: #25D366;
+            color: #fff;
+            border: 1px solid #25D366;
+        }
+
+        .btn-wa:hover { background: #1ebe57; border-color: #1ebe57; }
+
+        .btn-email {
+            background: none;
+            color: var(--color-black);
+            border: 1px solid var(--color-black);
+        }
+
+        .btn-email:hover { background: var(--color-black); color: var(--color-white); }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 900px) {
+            .overview-grid { grid-template-columns: 1fr; }
+            .persona-card { grid-template-columns: 1fr; }
+            .persona-sidebar { border-right: none; border-bottom: 1px solid #ece9e4; }
+            .persona-body { grid-template-columns: 1fr; }
+            .persona-pain { border-right: none; border-bottom: 1px solid #ece9e4; }
+            .solo-steps { grid-template-columns: 1fr; gap: 24px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="lang-bar">
+        <button class="lang-btn active" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="fr">FR</button>
+        <button class="lang-btn" data-lang="pl">PL</button>
+    </div>
+
+    <!-- ═══════ BACK NAV ═══════ -->
+    <nav class="back-nav">
+        <a href="website-pitch.html"><span class="lang-en">&#8592; Back to overview</span><span class="lang-fr">&#8592; Retour &#224; l'aper&#231;u</span><span class="lang-pl">&#8592; Powr&#243;t do przegl&#261;du</span></a>
+    </nav>
+
+    <!-- ═══════ SEGMENT HERO ═══════ -->
+    <div class="segment-hero">
+        <div class="segment-label"><span class="lang-en">Small Companies &amp; Solo</span><span class="lang-fr">Petites Entreprises &amp; Solo</span><span class="lang-pl">Ma&#322;e Firmy &amp; Solo</span></div>
+        <h1><span class="lang-en">Your Personal Intelligence System.</span><span class="lang-fr">Votre Syst&#232;me d'Intelligence Personnelle.</span><span class="lang-pl">Tw&#243;j System Osobistej Inteligencji.</span></h1>
+        <p class="pitch"><span class="lang-en">Prospection, marketing, trend monitoring, custom tools — all connected, all yours. Not a stack of subscriptions. A system built around how you work.</span><span class="lang-fr">Prospection, marketing, veille, outils sur mesure — tout connect&#233;, tout &#224; vous. Pas une pile d'abonnements. Un syst&#232;me construit autour de votre fa&#231;on de travailler.</span><span class="lang-pl">Prospecting, marketing, monitoring trend&#243;w, narz&#281;dzia na miar&#281; — wszystko po&#322;&#261;czone, wszystko Twoje. Nie stos subskrypcji. System zbudowany wok&#243;&#322; Twojego sposobu pracy.</span></p>
+        <p class="closer"><span class="lang-en">We build it together. You run it alone.</span><span class="lang-fr">On construit ensemble. Vous faites tourner seul.</span><span class="lang-pl">Budujemy razem. Prowadzisz samodzielnie.</span></p>
+    </div>
+
+    <!-- ═══════ HOW WE WORK TOGETHER ═══════ -->
+    <div class="solo-model">
+        <div class="solo-model-inner">
+            <h2><span class="lang-en">How we build your system</span><span class="lang-fr">Comment nous construisons votre syst&#232;me</span><span class="lang-pl">Jak budujemy Tw&#243;j system</span></h2>
+            <p style="font-size: 0.88rem; color: var(--color-gray); font-weight: 300; line-height: 1.7;"><span class="lang-en">Your Personal Intelligence System starts from your problems, not from a product catalog. You bring the context, we build the modules. Each piece plugs into your existing habits — small, consistent rituals, not a revolution. The result: a system you own and run independently.</span><span class="lang-fr">Votre Syst&#232;me d'Intelligence Personnelle part de vos probl&#232;mes, pas d'un catalogue produit. Vous apportez le contexte, nous construisons les modules. Chaque pi&#232;ce s'int&#232;gre &#224; vos habitudes existantes — des petits rituels r&#233;guliers, pas une r&#233;volution. Le r&#233;sultat : un syst&#232;me que vous poss&#233;dez et faites tourner seul.</span><span class="lang-pl">Tw&#243;j System Osobistej Inteligencji zaczyna od Twoich problem&#243;w, nie od katalogu produkt&#243;w. Ty dajesz kontekst, my budujemy modu&#322;y. Ka&#380;dy element wpasowuje si&#281; w Twoje istniej&#261;ce nawyki — ma&#322;e, regularne rytua&#322;y, nie rewolucja. Rezultat: system, kt&#243;ry posiadasz i prowadzisz samodzielnie.</span></p>
+        </div>
+        <div class="solo-steps">
+            <div class="solo-step">
+                <div class="step-num">1</div>
+                <h3><span class="lang-en">You share the problem</span><span class="lang-fr">Vous partagez le probl&#232;me</span><span class="lang-pl">Dzielisz si&#281; problemem</span></h3>
+                <p><span class="lang-en">Your domain knowledge, your context, your pain points. No jargon needed.</span><span class="lang-fr">Votre expertise m&#233;tier, votre contexte, vos points de douleur. Pas besoin de jargon.</span><span class="lang-pl">Twoja wiedza domenowa, Tw&#243;j kontekst, Twoje bol&#261;czki. Bez &#380;argonu.</span></p>
+            </div>
+            <div class="solo-step">
+                <div class="step-num">2</div>
+                <h3><span class="lang-en">We build it together</span><span class="lang-fr">On construit ensemble</span><span class="lang-pl">Budujemy razem</span></h3>
+                <p><span class="lang-en">Custom tools, automations, workflows — built for your specific business, not generic templates.</span><span class="lang-fr">Outils sur mesure, automatisations, workflows — construits pour votre business sp&#233;cifique, pas des templates g&#233;n&#233;riques.</span><span class="lang-pl">Narz&#281;dzia na miar&#281;, automatyzacje, workflow — zbudowane pod Tw&#243;j konkretny biznes, nie generyczne szablony.</span></p>
+            </div>
+            <div class="solo-step">
+                <div class="step-num">3</div>
+                <h3><span class="lang-en">You run it alone</span><span class="lang-fr">Vous faites tourner seul</span><span class="lang-pl">Prowadzisz samodzielnie</span></h3>
+                <p><span class="lang-en">Full ownership. You know how it works, you can extend it. No ongoing dependency.</span><span class="lang-fr">Propri&#233;t&#233; totale. Vous savez comment &#231;a marche, vous pouvez l'&#233;tendre. Pas de d&#233;pendance continue.</span><span class="lang-pl">Pe&#322;na w&#322;asno&#347;&#263;. Wiesz jak to dzia&#322;a, mo&#380;esz rozbudowywa&#263;. Bez ci&#261;g&#322;ej zale&#380;no&#347;ci.</span></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════ PERSONA OVERVIEW ═══════ -->
+    <div class="persona-overview">
+        <h2><span class="lang-en">Who we work with</span><span class="lang-fr">Avec qui nous travaillons</span><span class="lang-pl">Z kim pracujemy</span></h2>
+        <p class="section-sub"><span class="lang-en">Different profiles, same promise — we build, you run.</span><span class="lang-fr">Profils diff&#233;rents, m&#234;me promesse — on construit, vous faites tourner.</span><span class="lang-pl">R&#243;&#380;ne profile, ta sama obietnica — budujemy, prowadzisz.</span></p>
+        <div class="overview-grid">
+            <div class="overview-card">
+                <h3><span class="lang-en">AI-Aware Pragmatist</span><span class="lang-fr">Pragmatique AI-Aware</span><span class="lang-pl">Pragmatyk &#346;wiadomy AI</span></h3>
+                <p><span class="lang-en">Knows what AI can do, sells it — but prefers to delegate the technical build.</span><span class="lang-fr">Sait ce que l'IA peut faire, la vend — mais pr&#233;f&#232;re d&#233;l&#233;guer la construction technique.</span><span class="lang-pl">Wie co AI potrafi, sprzedaje to — ale woli delegowa&#263; budow&#281; techniczn&#261;.</span></p>
+            </div>
+            <div class="overview-card">
+                <h3><span class="lang-en">Solo Expert</span><span class="lang-fr">Expert Solo</span><span class="lang-pl">Ekspert Solo</span></h3>
+                <p><span class="lang-en">Deep domain expertise, blocked by lack of IT culture. Wants automation, not tutorials.</span><span class="lang-fr">Expertise m&#233;tier profonde, bloqu&#233; par le manque de culture IT. Veut de l'automatisation, pas des tutoriels.</span><span class="lang-pl">G&#322;&#281;boka wiedza domenowa, zablokowany brakiem kultury IT. Chce automatyzacji, nie tutoriali.</span></p>
+            </div>
+            <div class="overview-card">
+                <h3><span class="lang-en">Tool-Heavy Freelancer</span><span class="lang-fr">Freelancer Multi-Outils</span><span class="lang-pl">Freelancer Multi-Narz&#281;dziowy</span></h3>
+                <p><span class="lang-en">Discovers tools faster than most — but no time to go deep or build a real system.</span><span class="lang-fr">D&#233;couvre les outils plus vite que la plupart — mais pas le temps d'aller en profondeur ou de construire un vrai syst&#232;me.</span><span class="lang-pl">Odkrywa narz&#281;dzia szybciej ni&#380; wi&#281;kszo&#347;&#263; — ale nie ma czasu, &#380;eby p&#243;j&#347;&#263; w g&#322;&#261;b i zbudowa&#263; prawdziwy system.</span></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════ PERSONAS (DETAIL) ═══════ -->
+    <div class="personas-section">
+
+        <!-- AI-Aware Pragmatist -->
+        <div class="persona-card">
+            <div class="persona-sidebar">
+                <h3><span class="lang-en">AI-Aware Pragmatist</span><span class="lang-fr">Pragmatique AI-Aware</span><span class="lang-pl">Pragmatyk &#346;wiadomy AI</span></h3>
+                <p class="persona-role"><span class="lang-en">Knows what AI can do, sells AI services — but prefers to delegate the build.</span><span class="lang-fr">Sait ce que l'IA peut faire, vend des services IA — mais pr&#233;f&#232;re d&#233;l&#233;guer la construction.</span><span class="lang-pl">Wie co AI potrafi, sprzedaje us&#322;ugi AI — ale woli delegowa&#263; budow&#281;.</span></p>
+                <p class="persona-example">e.g. Thibault Chanut</p>
+            </div>
+            <div class="persona-body">
+                <div class="persona-pain">
+                    <h4><span class="lang-en">Pain points</span><span class="lang-fr">Points de douleur</span><span class="lang-pl">Wyzwania</span></h4>
+                    <ul>
+                        <li><span class="lang-en">"I sell AI services but can't build what I promise the client"</span><span class="lang-fr">"Je vends des services IA mais je ne peux pas construire ce que je promets au client"</span><span class="lang-pl">"Sprzedaj&#281; us&#322;ugi AI, ale nie mog&#281; zbudowa&#263; tego, co obiecuj&#281; klientowi"</span></li>
+                        <li><span class="lang-en">Needs reliable execution without learning to code</span><span class="lang-fr">A besoin d'une ex&#233;cution fiable sans apprendre &#224; coder</span><span class="lang-pl">Potrzebuje niezawodnej realizacji bez nauki kodowania</span></li>
+                        <li><span class="lang-en">Wants to scale offers without scaling effort</span><span class="lang-fr">Veut scaler les offres sans scaler l'effort</span><span class="lang-pl">Chce skalowa&#263; ofert&#281; bez skalowania wysi&#322;ku</span></li>
+                    </ul>
+                </div>
+                <div class="persona-offer">
+                    <h4><span class="lang-en">What we deliver</span><span class="lang-fr">Ce que nous livrons</span><span class="lang-pl">Co dostarczamy</span></h4>
+                    <ul>
+                        <li><span class="lang-en">White-label execution — you sell, we build</span><span class="lang-fr">Ex&#233;cution en white-label — vous vendez, on construit</span><span class="lang-pl">Realizacja white-label — Ty sprzedajesz, my budujemy</span></li>
+                        <li><span class="lang-en">Technical delivery on your client projects</span><span class="lang-fr">Livraison technique sur vos projets clients</span><span class="lang-pl">Dostarczenie techniczne na Twoich projektach klienckich</span></li>
+                        <li><span class="lang-en">Training + missions that don't burden you</span><span class="lang-fr">Formations + missions qui ne vous surchargent pas</span><span class="lang-pl">Szkolenia + misje, kt&#243;re Ci&#281; nie obci&#261;&#380;aj&#261;</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Solo Expert -->
+        <div class="persona-card">
+            <div class="persona-sidebar">
+                <h3><span class="lang-en">Solo Expert</span><span class="lang-fr">Expert Solo</span><span class="lang-pl">Ekspert Solo</span></h3>
+                <p class="persona-role"><span class="lang-en">Deep domain expertise, tries tools alone — blocked by lack of IT culture.</span><span class="lang-fr">Expertise m&#233;tier profonde, essaie les outils seul — bloqu&#233; par le manque de culture IT.</span><span class="lang-pl">G&#322;&#281;boka wiedza domenowa, pr&#243;buje narz&#281;dzi sam — zablokowany brakiem kultury IT.</span></p>
+                <p class="persona-example"><span class="lang-en">e.g. independent accountant</span><span class="lang-fr">ex. expert-comptable ind&#233;pendant</span><span class="lang-pl">np. samodzielny ksi&#281;gowy</span></p>
+            </div>
+            <div class="persona-body">
+                <div class="persona-pain">
+                    <h4><span class="lang-en">Pain points</span><span class="lang-fr">Points de douleur</span><span class="lang-pl">Wyzwania</span></h4>
+                    <ul>
+                        <li><span class="lang-en">Wants to automate but lacks technical skills</span><span class="lang-fr">Veut automatiser mais manque de comp&#233;tences techniques</span><span class="lang-pl">Chce automatyzowa&#263;, ale brakuje mu kompetencji technicznych</span></li>
+                        <li><span class="lang-en">Tried tools, tutorials — nothing sticks</span><span class="lang-fr">A essay&#233; les outils, les tutoriels — rien ne tient</span><span class="lang-pl">Pr&#243;bowa&#322; narz&#281;dzi, tutoriali — nic nie dzia&#322;a na d&#322;u&#380;sz&#261; met&#281;</span></li>
+                        <li><span class="lang-en">Spends hours on tasks that could take minutes</span><span class="lang-fr">Passe des heures sur des t&#226;ches qui pourraient prendre des minutes</span><span class="lang-pl">Sp&#281;dza godziny na zadaniach, kt&#243;re mog&#322;yby zaj&#261;&#263; minuty</span></li>
+                    </ul>
+                </div>
+                <div class="persona-offer">
+                    <h4><span class="lang-en">What we deliver</span><span class="lang-fr">Ce que nous livrons</span><span class="lang-pl">Co dostarczamy</span></h4>
+                    <ul>
+                        <li><span class="lang-en">Custom tools built for your exact workflow</span><span class="lang-fr">Outils sur mesure construits pour votre workflow exact</span><span class="lang-pl">Narz&#281;dzia na miar&#281; zbudowane pod Tw&#243;j dok&#322;adny workflow</span></li>
+                        <li><span class="lang-en">Hands-on setup — no tutorials, working solutions</span><span class="lang-fr">Mise en place pratique — pas de tutoriels, des solutions qui marchent</span><span class="lang-pl">Praktyczne wdro&#380;enie — bez tutoriali, dzia&#322;aj&#261;ce rozwi&#261;zania</span></li>
+                        <li><span class="lang-en">Full autonomy after handover</span><span class="lang-fr">Autonomie totale apr&#232;s le transfert</span><span class="lang-pl">Pe&#322;na autonomia po przekazaniu</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tool-Heavy Freelancer -->
+        <div class="persona-card">
+            <div class="persona-sidebar">
+                <h3><span class="lang-en">Tool-Heavy Freelancer</span><span class="lang-fr">Freelancer Multi-Outils</span><span class="lang-pl">Freelancer Multi-Narz&#281;dziowy</span></h3>
+                <p class="persona-role"><span class="lang-en">Performant freelancer — proactively discovers new tools, adopts faster than most. Paid per mission, not salary.</span><span class="lang-fr">Freelancer performant — d&#233;couvre proactivement de nouveaux outils, adopte plus vite que la plupart. Pay&#233; &#224; la mission, pas au salaire.</span><span class="lang-pl">Wydajny freelancer — proaktywnie odkrywa nowe narz&#281;dzia, adoptuje szybciej ni&#380; wi&#281;kszo&#347;&#263;. P&#322;atny za misj&#281;, nie pensj&#281;.</span></p>
+                <p class="persona-example">e.g. Monika Otto</p>
+            </div>
+            <div class="persona-body">
+                <div class="persona-pain">
+                    <h4><span class="lang-en">Pain points</span><span class="lang-fr">Points de douleur</span><span class="lang-pl">Wyzwania</span></h4>
+                    <ul>
+                        <li><span class="lang-en">No time to go deep on new tech — too busy delivering missions</span><span class="lang-fr">Pas le temps d'approfondir les nouvelles tech — trop occup&#233; &#224; livrer des missions</span><span class="lang-pl">Brak czasu na zg&#322;&#281;bianie nowych tech — zbyt zaj&#281;ty dowo&#380;eniem misji</span></li>
+                        <li><span class="lang-en">Runs training or consulting on the side — but no system behind it</span><span class="lang-fr">Fait de la formation ou du consulting en parall&#232;le — mais pas de syst&#232;me derri&#232;re</span><span class="lang-pl">Prowadzi szkolenia lub consulting na boku — ale bez systemu za tym</span></li>
+                        <li><span class="lang-en">Knows the tools exist, can't build a real workflow around them</span><span class="lang-fr">Sait que les outils existent, ne peut pas construire un vrai workflow autour</span><span class="lang-pl">Wie, &#380;e narz&#281;dzia istniej&#261;, nie potrafi zbudowa&#263; prawdziwego workflow wok&#243;&#322; nich</span></li>
+                    </ul>
+                </div>
+                <div class="persona-offer">
+                    <h4><span class="lang-en">What we deliver</span><span class="lang-fr">Ce que nous livrons</span><span class="lang-pl">Co dostarczamy</span></h4>
+                    <ul>
+                        <li><span class="lang-en">From tutorial-level to production-level on tools you've found</span><span class="lang-fr">Du niveau tutoriel au niveau production sur les outils que vous avez trouv&#233;s</span><span class="lang-pl">Od poziomu tutoriala do poziomu produkcji na narz&#281;dziach, kt&#243;re znalaz&#322;e&#347;</span></li>
+                        <li><span class="lang-en">Custom builds that go beyond what off-the-shelf offers</span><span class="lang-fr">Des constructions sur mesure qui vont au-del&#224; de ce que propose le off-the-shelf</span><span class="lang-pl">Budowy na miar&#281;, kt&#243;re id&#261; dalej ni&#380; to, co oferuje gotowy soft</span></li>
+                        <li><span class="lang-en">Technical partnership — you bring clients, we bring the build</span><span class="lang-fr">Partenariat technique — vous amenez les clients, nous amenons la construction</span><span class="lang-pl">Partnerstwo techniczne — Ty przynosisz klient&#243;w, my przynosimy budow&#281;</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════ WHAT WE BUILD ═══════ -->
+    <div class="personas-section">
+        <h2><span class="lang-en">Modules of your system</span><span class="lang-fr">Modules de votre syst&#232;me</span><span class="lang-pl">Modu&#322;y Twojego systemu</span></h2>
+        <p class="section-sub"><span class="lang-en">Each module solves a real problem. Together, they form your Personal Intelligence.</span><span class="lang-fr">Chaque module r&#233;sout un vrai probl&#232;me. Ensemble, ils forment votre Intelligence Personnelle.</span><span class="lang-pl">Ka&#380;dy modu&#322; rozwi&#261;zuje realny problem. Razem tworz&#261; Twoj&#261; Osobist&#261; Inteligencj&#281;.</span></p>
+
+        <div class="persona-card">
+            <div class="persona-sidebar">
+                <h3>Prospection</h3>
+                <p class="persona-role"><span class="lang-en">Automated lead generation, outreach sequences, CRM pipelines.</span><span class="lang-fr">G&#233;n&#233;ration de leads automatis&#233;e, s&#233;quences d'outreach, pipelines CRM.</span><span class="lang-pl">Zautomatyzowana generacja lead&#243;w, sekwencje outreach, pipeline CRM.</span></p>
+            </div>
+            <div class="persona-body">
+                <div class="persona-pain">
+                    <h4><span class="lang-en">Before</span><span class="lang-fr">Avant</span><span class="lang-pl">Przed</span></h4>
+                    <ul>
+                        <li><span class="lang-en">Manual prospecting eating all your time</span><span class="lang-fr">La prospection manuelle qui mange tout votre temps</span><span class="lang-pl">R&#281;czny prospecting zjadaj&#261;cy ca&#322;y Tw&#243;j czas</span></li>
+                        <li><span class="lang-en">No system — leads fall through the cracks</span><span class="lang-fr">Pas de syst&#232;me — les leads tombent dans les failles</span><span class="lang-pl">Brak systemu — leady przepadaj&#261;</span></li>
+                        <li><span class="lang-en">Generic tools that don't fit your niche</span><span class="lang-fr">Des outils g&#233;n&#233;riques qui ne correspondent pas &#224; votre niche</span><span class="lang-pl">Generyczne narz&#281;dzia niedopasowane do Twojej niszy</span></li>
+                    </ul>
+                </div>
+                <div class="persona-offer">
+                    <h4><span class="lang-en">After</span><span class="lang-fr">Apr&#232;s</span><span class="lang-pl">Po</span></h4>
+                    <ul>
+                        <li><span class="lang-en">Automated lead sourcing tailored to your market</span><span class="lang-fr">Sourcing de leads automatis&#233; adapt&#233; &#224; votre march&#233;</span><span class="lang-pl">Zautomatyzowany sourcing lead&#243;w dopasowany do Twojego rynku</span></li>
+                        <li><span class="lang-en">Outreach sequences that run while you sleep</span><span class="lang-fr">Des s&#233;quences d'outreach qui tournent pendant que vous dormez</span><span class="lang-pl">Sekwencje outreach, kt&#243;re dzia&#322;aj&#261; gdy &#347;pisz</span></li>
+                        <li><span class="lang-en">Simple CRM you actually use</span><span class="lang-fr">Un CRM simple que vous utilisez vraiment</span><span class="lang-pl">Prosty CRM, kt&#243;rego naprawd&#281; u&#380;ywasz</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="persona-card">
+            <div class="persona-sidebar">
+                <h3>Marketing</h3>
+                <p class="persona-role"><span class="lang-en">Newsletters, social media, content generation — automated and on-brand.</span><span class="lang-fr">Newsletters, r&#233;seaux sociaux, g&#233;n&#233;ration de contenu — automatis&#233; et on-brand.</span><span class="lang-pl">Newslettery, social media, generowanie contentu — zautomatyzowane i zgodne z mark&#261;.</span></p>
+            </div>
+            <div class="persona-body">
+                <div class="persona-pain">
+                    <h4><span class="lang-en">Before</span><span class="lang-fr">Avant</span><span class="lang-pl">Przed</span></h4>
+                    <ul>
+                        <li><span class="lang-en">No time or skill for consistent content</span><span class="lang-fr">Pas le temps ni les comp&#233;tences pour du contenu r&#233;gulier</span><span class="lang-pl">Brak czasu i umiej&#281;tno&#347;ci na regularny content</span></li>
+                        <li><span class="lang-en">Marketing feels like a second full-time job</span><span class="lang-fr">Le marketing ressemble &#224; un second emploi &#224; plein temps</span><span class="lang-pl">Marketing wydaje si&#281; drugim etatem</span></li>
+                        <li><span class="lang-en">Tools that cost more than they produce</span><span class="lang-fr">Des outils qui co&#251;tent plus qu'ils ne produisent</span><span class="lang-pl">Narz&#281;dzia, kt&#243;re kosztuj&#261; wi&#281;cej ni&#380; produkuj&#261;</span></li>
+                    </ul>
+                </div>
+                <div class="persona-offer">
+                    <h4><span class="lang-en">After</span><span class="lang-fr">Apr&#232;s</span><span class="lang-pl">Po</span></h4>
+                    <ul>
+                        <li><span class="lang-en">Newsletter pipeline that runs on autopilot</span><span class="lang-fr">Pipeline de newsletter qui tourne en autopilote</span><span class="lang-pl">Pipeline newslettera dzia&#322;aj&#261;cy na autopilocie</span></li>
+                        <li><span class="lang-en">Content generation aligned with your voice</span><span class="lang-fr">G&#233;n&#233;ration de contenu align&#233;e avec votre voix</span><span class="lang-pl">Generowanie contentu zgodnego z Twoim g&#322;osem</span></li>
+                        <li><span class="lang-en">Simple stack — no "usine &#224; gaz"</span><span class="lang-fr">Stack simple — pas d'usine &#224; gaz</span><span class="lang-pl">Prosty stack — bez kombajn&#243;w</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="persona-card">
+            <div class="persona-sidebar">
+                <h3><span class="lang-en">Custom Tools</span><span class="lang-fr">Outils Sur Mesure</span><span class="lang-pl">Narz&#281;dzia Na Miar&#281;</span></h3>
+                <p class="persona-role"><span class="lang-en">Bespoke automations and internal tools — built for your exact workflow.</span><span class="lang-fr">Automatisations et outils internes sur mesure — construits pour votre workflow exact.</span><span class="lang-pl">Automatyzacje i narz&#281;dzia wewn&#281;trzne na miar&#281; — zbudowane pod Tw&#243;j dok&#322;adny workflow.</span></p>
+            </div>
+            <div class="persona-body">
+                <div class="persona-pain">
+                    <h4><span class="lang-en">Before</span><span class="lang-fr">Avant</span><span class="lang-pl">Przed</span></h4>
+                    <ul>
+                        <li><span class="lang-en">Repetitive tasks you do manually every week</span><span class="lang-fr">Des t&#226;ches r&#233;p&#233;titives que vous faites manuellement chaque semaine</span><span class="lang-pl">Powtarzalne zadania, kt&#243;re robisz r&#281;cznie co tydzie&#324;</span></li>
+                        <li><span class="lang-en">Off-the-shelf software that's 80% features you don't need</span><span class="lang-fr">Des logiciels pr&#234;ts &#224; l'emploi dont 80% des fonctionnalit&#233;s sont inutiles</span><span class="lang-pl">Gotowy soft, z kt&#243;rego 80% funkcji nie potrzebujesz</span></li>
+                        <li><span class="lang-en">No budget for a dev team</span><span class="lang-fr">Pas de budget pour une &#233;quipe de d&#233;veloppeurs</span><span class="lang-pl">Brak bud&#380;etu na zesp&#243;&#322; dev&#243;w</span></li>
+                    </ul>
+                </div>
+                <div class="persona-offer">
+                    <h4><span class="lang-en">After</span><span class="lang-fr">Apr&#232;s</span><span class="lang-pl">Po</span></h4>
+                    <ul>
+                        <li><span class="lang-en">Tools built exactly for your use case</span><span class="lang-fr">Des outils construits exactement pour votre cas d'usage</span><span class="lang-pl">Narz&#281;dzia zbudowane dok&#322;adnie pod Tw&#243;j przypadek u&#380;ycia</span></li>
+                        <li><span class="lang-en">Automations that save hours every week</span><span class="lang-fr">Des automatisations qui &#233;conomisent des heures chaque semaine</span><span class="lang-pl">Automatyzacje oszcz&#281;dzaj&#261;ce godziny co tydzie&#324;</span></li>
+                        <li><span class="lang-en">You own it — no subscription, no lock-in</span><span class="lang-fr">Vous le poss&#233;dez — pas d'abonnement, pas de lock-in</span><span class="lang-pl">Twoja w&#322;asno&#347;&#263; — bez subskrypcji, bez lock-in</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="persona-card">
+            <div class="persona-sidebar">
+                <h3><span class="lang-en">Faceless Channels</span><span class="lang-fr">Canaux Sans Visage</span><span class="lang-pl">Kana&#322;y Bez Twarzy</span></h3>
+                <p class="persona-role"><span class="lang-en">Automated content channels that work 24/7 — without showing your face.</span><span class="lang-fr">Des canaux de contenu automatis&#233;s qui fonctionnent 24/7 — sans montrer votre visage.</span><span class="lang-pl">Zautomatyzowane kana&#322;y contentu dzia&#322;aj&#261;ce 24/7 — bez pokazywania twarzy.</span></p>
+            </div>
+            <div class="persona-body">
+                <div class="persona-pain">
+                    <h4><span class="lang-en">Before</span><span class="lang-fr">Avant</span><span class="lang-pl">Przed</span></h4>
+                    <ul>
+                        <li><span class="lang-en">Content creation requires your face and your time</span><span class="lang-fr">La cr&#233;ation de contenu n&#233;cessite votre visage et votre temps</span><span class="lang-pl">Tworzenie contentu wymaga Twojej twarzy i czasu</span></li>
+                        <li><span class="lang-en">Inconsistent posting kills your reach</span><span class="lang-fr">La publication irr&#233;guli&#232;re tue votre port&#233;e</span><span class="lang-pl">Nieregularne publikowanie zabija Tw&#243;j zasi&#281;g</span></li>
+                        <li><span class="lang-en">No system to scale content without scaling effort</span><span class="lang-fr">Pas de syst&#232;me pour scaler le contenu sans scaler l'effort</span><span class="lang-pl">Brak systemu do skalowania contentu bez skalowania wysi&#322;ku</span></li>
+                    </ul>
+                </div>
+                <div class="persona-offer">
+                    <h4><span class="lang-en">After</span><span class="lang-fr">Apr&#232;s</span><span class="lang-pl">Po</span></h4>
+                    <ul>
+                        <li><span class="lang-en">Automated content channels running on autopilot</span><span class="lang-fr">Des canaux de contenu automatis&#233;s en autopilote</span><span class="lang-pl">Zautomatyzowane kana&#322;y contentu na autopilocie</span></li>
+                        <li><span class="lang-en">Consistent presence without your daily involvement</span><span class="lang-fr">Pr&#233;sence r&#233;guli&#232;re sans votre implication quotidienne</span><span class="lang-pl">Sta&#322;a obecno&#347;&#263; bez Twojego codziennego zaanga&#380;owania</span></li>
+                        <li><span class="lang-en">Revenue-generating channels you fully own</span><span class="lang-fr">Des canaux g&#233;n&#233;rateurs de revenus que vous poss&#233;dez enti&#232;rement</span><span class="lang-pl">Kana&#322;y generuj&#261;ce przych&#243;d, kt&#243;re w pe&#322;ni posiadasz</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="persona-card">
+            <div class="persona-sidebar">
+                <h3><span class="lang-en">Trend Watch</span><span class="lang-fr">Veille Tendances</span><span class="lang-pl">Monitoring Trend&#243;w</span></h3>
+                <p class="persona-role"><span class="lang-en">Ad-free trend monitoring — real news, no sponsored noise.</span><span class="lang-fr">Veille des tendances sans pub — de vraies infos, pas de bruit sponsoris&#233;.</span><span class="lang-pl">Monitoring trend&#243;w bez reklam — prawdziwe wiadomo&#347;ci, zero sponsorowanego szumu.</span></p>
+            </div>
+            <div class="persona-body">
+                <div class="persona-pain">
+                    <h4><span class="lang-en">Before</span><span class="lang-fr">Avant</span><span class="lang-pl">Przed</span></h4>
+                    <ul>
+                        <li><span class="lang-en">Aggregators (Google News, Flipboard…) are full of ads and sponsored content</span><span class="lang-fr">Les agr&#233;gateurs (Google News, Flipboard…) sont pleins de pubs et de contenu sponsoris&#233;</span><span class="lang-pl">Agregatory (Google News, Flipboard…) s&#261; pe&#322;ne reklam i sponsorowanego contentu</span></li>
+                        <li><span class="lang-en">You can't tell what's a real trend and what's paid placement</span><span class="lang-fr">Vous ne pouvez pas distinguer une vraie tendance d'un placement pay&#233;</span><span class="lang-pl">Nie odr&#243;&#380;nisz prawdziwego trendu od p&#322;atnego lokowania</span></li>
+                        <li><span class="lang-en">Hours spent filtering noise to find what actually matters</span><span class="lang-fr">Des heures pass&#233;es &#224; filtrer le bruit pour trouver ce qui compte vraiment</span><span class="lang-pl">Godziny sp&#281;dzone na filtrowaniu szumu, &#380;eby znale&#378;&#263; to, co naprawd&#281; wa&#380;ne</span></li>
+                    </ul>
+                </div>
+                <div class="persona-offer">
+                    <h4><span class="lang-en">After</span><span class="lang-fr">Apr&#232;s</span><span class="lang-pl">Po</span></h4>
+                    <ul>
+                        <li><span class="lang-en">Custom trend feed — zero ads, zero sponsored bias</span><span class="lang-fr">Flux de tendances sur mesure — z&#233;ro pub, z&#233;ro biais sponsoris&#233;</span><span class="lang-pl">W&#322;asny feed trend&#243;w — zero reklam, zero sponsorowanego biasu</span></li>
+                        <li><span class="lang-en">Only the signals relevant to your industry, delivered daily</span><span class="lang-fr">Uniquement les signaux pertinents pour votre industrie, livr&#233;s quotidiennement</span><span class="lang-pl">Tylko sygna&#322;y istotne dla Twojej bran&#380;y, dostarczane codziennie</span></li>
+                        <li><span class="lang-en">A system you own — no algorithm deciding what you see</span><span class="lang-fr">Un syst&#232;me que vous poss&#233;dez — pas d'algorithme qui d&#233;cide ce que vous voyez</span><span class="lang-pl">System, kt&#243;ry posiadasz — &#380;aden algorytm nie decyduje co widzisz</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════ CTA ═══════ -->
+    <section class="section-cta">
+        <h2><span class="lang-en">The best next step is a conversation.</span><span class="lang-fr">La meilleure prochaine &#233;tape, c'est une conversation.</span><span class="lang-pl">Najlepszy nast&#281;pny krok to rozmowa.</span></h2>
+        <p class="contact-sub"><span class="lang-en">15 minutes to understand where you stand — and what you could build next.</span><span class="lang-fr">15 minutes pour comprendre o&#249; vous en &#234;tes — et ce que vous pourriez construire ensuite.</span><span class="lang-pl">15 minut, &#380;eby zrozumie&#263;, gdzie jeste&#347;, — i co mo&#380;esz zbudowa&#263; dalej.</span></p>
+        <div class="contact-buttons">
+            <a href="https://wa.me/33784003518" target="_blank" class="btn-wa">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                WhatsApp
+            </a>
+            <a href="mailto:aleksander.dabrowski@gmail.com" class="btn-email">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4L12 13 2 4"/></svg>
+                Email
+            </a>
+        </div>
+    </section>
+
+<script>
+(function() {
+    const urlLang = new URLSearchParams(window.location.search).get('lang');
+    const saved = urlLang || localStorage.getItem('lang') || 'en';
+    if (urlLang) localStorage.setItem('lang', urlLang);
+    if (saved !== 'en') {
+        document.body.classList.add(saved);
+        document.querySelector('.lang-btn.active').classList.remove('active');
+        document.querySelector('.lang-btn[data-lang="' + saved + '"]').classList.add('active');
+    }
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const lang = this.dataset.lang;
+            document.body.classList.remove('fr', 'pl');
+            if (lang !== 'en') document.body.classList.add(lang);
+            document.querySelector('.lang-btn.active').classList.remove('active');
+            this.classList.add('active');
+            localStorage.setItem('lang', lang);
+        });
+    });
+})();
+</script>
+
+</body>
+</html>

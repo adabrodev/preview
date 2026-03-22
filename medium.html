@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>adabro.ai — Medium Companies</title>
+    <link rel="icon" type="image/x-icon" href="https://images.squarespace-cdn.com/content/v1/6702a0ccf51e716b1eaf868d/35f375b1-5445-4110-872d-31448d40979e/favicon.ico?format=100w"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100;0,400;0,600;0,700;1,400&family=Poppins:ital,wght@0,300;0,400;0,600;0,700;1,400">
+    <style>
+        :root {
+            --max-width: 1200px;
+            --gutter: 4vw;
+            --font-heading: 'Urbanist', sans-serif;
+            --font-body: 'Poppins', sans-serif;
+            --color-black: #1a1a1a;
+            --color-white: #ffffff;
+            --color-offwhite: #f7f5f2;
+            --color-gray: #666;
+            --color-light-gray: #999;
+            --color-accent: #8b6cc1;
+            --color-segment: #2d7d9a;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--color-black);
+            background: var(--color-white);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ─── LANG SWITCHER ─── */
+        .lang-bar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            z-index: 200;
+            display: flex;
+            gap: 2px;
+            padding: 8px 16px;
+            background: rgba(0,0,0,0.7);
+            border-radius: 0 0 0 6px;
+        }
+        .lang-btn {
+            font-family: var(--font-body);
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            padding: 4px 10px;
+            border: 1px solid rgba(255,255,255,0.3);
+            background: transparent;
+            color: rgba(255,255,255,0.6);
+            cursor: pointer;
+            border-radius: 2px;
+            transition: all 0.2s;
+        }
+        .lang-btn:hover { color: #fff; border-color: rgba(255,255,255,0.6); }
+        .lang-btn.active { background: rgba(255,255,255,0.15); color: #fff; border-color: rgba(255,255,255,0.6); }
+
+        /* Language visibility */
+        .lang-fr, .lang-pl { display: none; }
+        body.fr .lang-en { display: none; }
+        body.fr .lang-fr { display: inline; }
+        body.pl .lang-en { display: none; }
+        body.pl .lang-pl { display: inline; }
+        .lang-fr-block, .lang-pl-block { display: none; }
+        body.fr .lang-fr-block { display: block; }
+        body.fr .lang-en-block { display: none; }
+        body.pl .lang-pl-block { display: block; }
+        body.pl .lang-en-block { display: none; }
+
+        /* ─── BACK NAV ─── */
+        .back-nav {
+            padding: 20px var(--gutter);
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+
+        .back-nav a {
+            font-family: var(--font-body);
+            font-size: 0.8rem;
+            font-weight: 400;
+            color: var(--color-light-gray);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .back-nav a:hover { color: var(--color-black); }
+
+        /* ─── SEGMENT HERO ─── */
+        .segment-hero {
+            padding: 60px var(--gutter) 60px;
+            text-align: center;
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+
+        .segment-label {
+            font-family: var(--font-body);
+            font-size: 0.6rem;
+            font-weight: 700;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--color-segment);
+            margin-bottom: 16px;
+        }
+
+        .segment-hero h1 {
+            font-family: var(--font-heading);
+            font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .segment-hero .pitch {
+            font-size: 1rem;
+            font-weight: 300;
+            color: var(--color-gray);
+            max-width: 600px;
+            margin: 0 auto 16px;
+            line-height: 1.8;
+        }
+
+        .segment-hero .closer {
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #2a1f3d;
+        }
+
+        /* ─── CROSS-THEMES ─── */
+        .cross-themes {
+            background: #1a1a2e;
+            color: var(--color-white);
+            padding: 60px var(--gutter);
+        }
+
+        .cross-themes-inner {
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+
+        .cross-themes h2 {
+            font-family: var(--font-heading);
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 32px;
+        }
+
+        .themes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
+        }
+
+        .theme-card {
+            border: 1px solid rgba(255,255,255,0.12);
+            padding: 28px 24px;
+            border-radius: 2px;
+        }
+
+        .theme-card .theme-num {
+            font-size: 0.6rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: rgba(255,255,255,0.35);
+            margin-bottom: 10px;
+        }
+
+        .theme-card h3 {
+            font-family: var(--font-heading);
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .theme-card p {
+            font-size: 0.8rem;
+            font-weight: 300;
+            color: rgba(255,255,255,0.5);
+            line-height: 1.65;
+        }
+
+        /* ─── PERSONA OVERVIEW ─── */
+        .persona-overview {
+            padding: 60px var(--gutter);
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+
+        .persona-overview h2 {
+            font-family: var(--font-heading);
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .persona-overview .section-sub {
+            font-size: 0.85rem;
+            color: var(--color-light-gray);
+            margin-bottom: 40px;
+        }
+
+        .overview-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .overview-card {
+            border: 1px solid #ece9e4;
+            padding: 28px 24px;
+            border-radius: 2px;
+        }
+
+        .overview-card h3 {
+            font-family: var(--font-heading);
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .overview-card p {
+            font-size: 0.82rem;
+            font-weight: 300;
+            color: var(--color-gray);
+            line-height: 1.6;
+        }
+
+        @media (max-width: 900px) {
+            .overview-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ─── PERSONAS ─── */
+        .personas-section {
+            padding: 60px var(--gutter);
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+
+        .personas-section h2 {
+            font-family: var(--font-heading);
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .personas-section .section-sub {
+            font-size: 0.85rem;
+            color: var(--color-light-gray);
+            margin-bottom: 40px;
+        }
+
+        .persona-card {
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            gap: 0;
+            border: 1px solid #ece9e4;
+            margin-bottom: 24px;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .persona-sidebar {
+            padding: 32px 28px;
+            border-right: 1px solid #ece9e4;
+        }
+
+        .persona-sidebar h3 {
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .persona-sidebar .persona-role {
+            font-size: 0.78rem;
+            font-weight: 300;
+            color: var(--color-light-gray);
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .persona-sidebar .persona-example {
+            font-size: 0.72rem;
+            font-weight: 400;
+            color: var(--color-gray);
+            padding-top: 16px;
+            border-top: 1px solid #eee;
+        }
+
+        .persona-body {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+        }
+
+        .persona-pain, .persona-offer { padding: 28px; }
+
+        .persona-pain {
+            border-right: 1px solid #ece9e4;
+            background: #fdfcfa;
+        }
+
+        .persona-pain h4, .persona-offer h4 {
+            font-family: var(--font-body);
+            font-size: 0.62rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        .persona-pain h4 { color: #c0392b; }
+        .persona-offer h4 { color: var(--color-accent); }
+
+        .persona-pain ul, .persona-offer ul { list-style: none; padding: 0; }
+
+        .persona-pain li, .persona-offer li {
+            font-size: 0.82rem;
+            font-weight: 300;
+            color: var(--color-gray);
+            line-height: 1.65;
+            padding: 6px 0;
+            padding-left: 16px;
+            position: relative;
+        }
+
+        .persona-pain li::before {
+            content: "—";
+            position: absolute;
+            left: 0;
+            color: #ddd;
+        }
+
+        .persona-offer li::before {
+            content: "\2192";
+            position: absolute;
+            left: 0;
+            color: var(--color-accent);
+        }
+
+        /* ─── CTA ─── */
+        .section-cta {
+            text-align: center;
+            padding: 64px var(--gutter);
+            background: var(--color-white);
+        }
+
+        .section-cta h2 {
+            font-family: var(--font-heading);
+            font-size: clamp(1.4rem, 2.5vw, 2rem);
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .contact-sub {
+            font-size: 0.88rem;
+            font-weight: 300;
+            color: var(--color-light-gray);
+            margin-bottom: 32px;
+        }
+
+        .contact-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn-wa, .btn-email {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-decoration: none;
+            padding: 16px 36px;
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+
+        .btn-wa {
+            background: #25D366;
+            color: #fff;
+            border: 1px solid #25D366;
+        }
+
+        .btn-wa:hover { background: #1ebe57; border-color: #1ebe57; }
+
+        .btn-email {
+            background: none;
+            color: var(--color-black);
+            border: 1px solid var(--color-black);
+        }
+
+        .btn-email:hover { background: var(--color-black); color: var(--color-white); }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 900px) {
+            .persona-card { grid-template-columns: 1fr; }
+            .persona-sidebar { border-right: none; border-bottom: 1px solid #ece9e4; }
+            .persona-body { grid-template-columns: 1fr; }
+            .persona-pain { border-right: none; border-bottom: 1px solid #ece9e4; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="lang-bar">
+        <button class="lang-btn active" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="fr">FR</button>
+        <button class="lang-btn" data-lang="pl">PL</button>
+    </div>
+
+    <!-- ═══════ BACK NAV ═══════ -->
+    <nav class="back-nav">
+        <a href="website-pitch.html"><span class="lang-en">&larr; Back to overview</span><span class="lang-fr">&larr; Retour &agrave; l'aper&ccedil;u</span><span class="lang-pl">&larr; Powr&oacute;t do przegl&#261;du</span></a>
+    </nav>
+
+    <!-- ═══════ SEGMENT HERO ═══════ -->
+    <div class="segment-hero">
+        <div class="segment-label"><span class="lang-en">Medium Companies</span><span class="lang-fr">Entreprises Moyennes</span><span class="lang-pl">&#346;rednie Firmy</span></div>
+        <h1 class="lang-en-block">The race is accelerating.<br>New levers are emerging.</h1>
+        <h1 class="lang-fr-block">La course acc&eacute;l&egrave;re.<br>De nouveaux leviers apparaissent.</h1>
+        <h1 class="lang-pl-block">Wy&#347;cig przyspiesza.<br>Pojawiaj&#261; si&#281; nowe d&#378;wignie.</h1>
+        <p class="pitch"><span class="lang-en">Quick wins, scalable roadmap, and someone who does both.</span><span class="lang-fr">Quick wins, roadmap scalable, et quelqu'un qui fait les deux.</span><span class="lang-pl">Szybkie wygrane, skalowalna roadmapa i kto&#347;, kto robi jedno i drugie.</span></p>
+        <p class="closer"><span class="lang-en">No need for five vendors. One who thinks and builds.</span><span class="lang-fr">Pas besoin de cinq prestataires. Un qui pense et construit.</span><span class="lang-pl">Nie potrzebujesz pi&#281;ciu dostawc&oacute;w. Jeden, kt&oacute;ry my&#347;li i buduje.</span></p>
+    </div>
+
+    <!-- ═══════ CROSS-THEMES ═══════ -->
+    <div class="cross-themes">
+        <div class="cross-themes-inner">
+            <h2><span class="lang-en">What we hear across medium companies</span><span class="lang-fr">Ce que nous entendons dans les entreprises moyennes</span><span class="lang-pl">Co s&#322;yszymy w &#347;rednich firmach</span></h2>
+            <div class="themes-grid">
+                <div class="theme-card">
+                    <div class="theme-num">01</div>
+                    <h3><span class="lang-en">Too few people, too much to do</span><span class="lang-fr">Trop peu de gens, trop &agrave; faire</span><span class="lang-pl">Za ma&#322;o ludzi, za du&#380;o do zrobienia</span></h3>
+                    <p><span class="lang-en">No dedicated team. Reporting eats strategy time. Drowning in requests with no bandwidth.</span><span class="lang-fr">Pas d'&eacute;quipe d&eacute;di&eacute;e. Le reporting mange le temps strat&eacute;gie. Noy&eacute; dans les demandes sans bande passante.</span><span class="lang-pl">Brak dedykowanego zespo&#322;u. Reporting zjada czas na strategi&#281;. Zalani requestami bez bandwidth.</span></p>
+                </div>
+                <div class="theme-card">
+                    <div class="theme-num">02</div>
+                    <h3><span class="lang-en">Duct-tape stack</span><span class="lang-fr">Stack bricol&eacute;</span><span class="lang-pl">Stack na ta&#347;m&#281; klej&#261;c&#261;</span></h3>
+                    <p><span class="lang-en">5 vendors, data copied between systems, nobody sees the full picture.</span><span class="lang-fr">5 prestataires, donn&eacute;es copi&eacute;es entre syst&egrave;mes, personne ne voit la vue d'ensemble.</span><span class="lang-pl">5 dostawc&oacute;w, dane kopiowane mi&#281;dzy systemami, nikt nie widzi ca&#322;o&#347;ci.</span></p>
+                </div>
+                <div class="theme-card">
+                    <div class="theme-num">03</div>
+                    <h3><span class="lang-en">Data exists but doesn't work</span><span class="lang-fr">Les donn&eacute;es existent mais ne fonctionnent pas</span><span class="lang-pl">Dane istniej&#261;, ale nie dzia&#322;aj&#261;</span></h3>
+                    <p><span class="lang-en">Can't turn data into campaigns fast enough. Insights produced but never reach decision-makers.</span><span class="lang-fr">Impossible de transformer les donn&eacute;es en campagnes assez vite. Des insights produits qui n'atteignent jamais les d&eacute;cideurs.</span><span class="lang-pl">Nie mo&#380;na przekszta&#322;ci&#263; danych w kampanie wystarczaj&#261;co szybko. Insighty produkowane, ale nigdy nie docieraj&#261; do decydent&oacute;w.</span></p>
+                </div>
+                <div class="theme-card">
+                    <div class="theme-num">04</div>
+                    <h3><span class="lang-en">No one sees the whole picture</span><span class="lang-fr">Personne ne voit la vue d'ensemble</span><span class="lang-pl">Nikt nie widzi ca&#322;o&#347;ci</span></h3>
+                    <p><span class="lang-en">Which metrics matter at this stage? Each vendor sees their piece, nobody connects the dots.</span><span class="lang-fr">Quelles m&eacute;triques comptent &agrave; ce stade ? Chaque prestataire voit sa partie, personne ne connecte les points.</span><span class="lang-pl">Kt&oacute;re metryki maj&#261; znaczenie na tym etapie? Ka&#380;dy dostawca widzi swoj&#261; cz&#281;&#347;&#263;, nikt nie &#322;&#261;czy kropek.</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════ PERSONA OVERVIEW ═══════ -->
+    <div class="persona-overview">
+        <h2><span class="lang-en">Who we work with</span><span class="lang-fr">Avec qui nous travaillons</span><span class="lang-pl">Z kim pracujemy</span></h2>
+        <p class="section-sub"><span class="lang-en">Key personas in scaling companies &mdash; and what we solve for each.</span><span class="lang-fr">Personas cl&eacute;s dans les entreprises en croissance &mdash; et ce que nous r&eacute;solvons pour chacune.</span><span class="lang-pl">Kluczowe persony w rosn&#261;cych firmach &mdash; i co rozwi&#261;zujemy dla ka&#380;dej.</span></p>
+        <div class="overview-grid">
+            <div class="overview-card">
+                <h3><span class="lang-en">CEO / Founder</span><span class="lang-fr">CEO / Fondateur</span><span class="lang-pl">CEO / Za&#322;o&#380;yciel</span></h3>
+                <p><span class="lang-en">Driving growth without the budget for a full data and marketing team.</span><span class="lang-fr">Piloter la croissance sans le budget pour une &eacute;quipe data et marketing compl&egrave;te.</span><span class="lang-pl">Nap&#281;dzanie wzrostu bez bud&#380;etu na pe&#322;ny zesp&oacute;&#322; data i marketingu.</span></p>
+            </div>
+            <div class="overview-card">
+                <h3><span class="lang-en">Dir. Marketing</span><span class="lang-fr">Dir. Marketing</span><span class="lang-pl">Dyr. Marketingu</span></h3>
+                <p><span class="lang-en">Turning data into campaigns that ship &mdash; not reports that pile up.</span><span class="lang-fr">Transformer les donn&eacute;es en campagnes qui livrent &mdash; pas des rapports qui s'empilent.</span><span class="lang-pl">Przekszta&#322;canie danych w kampanie, kt&oacute;re dowoz&#261; &mdash; nie raporty, kt&oacute;re si&#281; pi&#281;trz&#261;.</span></p>
+            </div>
+            <div class="overview-card">
+                <h3>Head Data / Analytics</h3>
+                <p><span class="lang-en">Connecting insights to business decisions at scale.</span><span class="lang-fr">Connecter les insights aux d&eacute;cisions business &agrave; l'&eacute;chelle.</span><span class="lang-pl">&#321;&#261;czenie insight&oacute;w z decyzjami biznesowymi na skal&#281;.</span></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════ PERSONAS (DETAIL) ═══════ -->
+    <div class="personas-section">
+
+        <!-- CEO Scaleup -->
+        <div class="persona-card">
+            <div class="persona-sidebar">
+                <h3><span class="lang-en">CEO / Founder</span><span class="lang-fr">CEO / Fondateur</span><span class="lang-pl">CEO / Za&#322;o&#380;yciel</span></h3>
+                <p class="persona-role"><span class="lang-en">Scaleup CEO &mdash; needs growth but can't afford a full data/marketing team.</span><span class="lang-fr">CEO de scaleup &mdash; a besoin de croissance mais ne peut pas s'offrir une &eacute;quipe data/marketing compl&egrave;te.</span><span class="lang-pl">CEO scaleupa &mdash; potrzebuje wzrostu, ale nie sta&#263; go na pe&#322;ny zesp&oacute;&#322; data/marketing.</span></p>
+                <p class="persona-example">e.g. Damien Bon / Skill&amp;You, Lisa Chavy / Livy</p>
+            </div>
+            <div class="persona-body">
+                <div class="persona-pain">
+                    <h4><span class="lang-en">Pain points</span><span class="lang-fr">Points de douleur</span><span class="lang-pl">Wyzwania</span></h4>
+                    <ul>
+                        <li><span class="lang-en">"I need growth but can't afford a full data/marketing team"</span><span class="lang-fr">"J'ai besoin de croissance mais je ne peux pas me permettre une &eacute;quipe data/marketing compl&egrave;te"</span><span class="lang-pl">"Potrzebuj&#281; wzrostu, ale nie sta&#263; mnie na pe&#322;ny zesp&oacute;&#322; data/marketing"</span></li>
+                        <li><span class="lang-en">"My stack is held together with duct tape"</span><span class="lang-fr">"Mon stack tient avec du scotch"</span><span class="lang-pl">"M&oacute;j stack trzyma si&#281; na ta&#347;mie klej&#261;cej"</span></li>
+                        <li><span class="lang-en">"I don't know which metrics to track for my stage"</span><span class="lang-fr">"Je ne sais pas quelles m&eacute;triques suivre pour mon stade"</span><span class="lang-pl">"Nie wiem, kt&oacute;re metryki &#347;ledzi&#263; na moim etapie"</span></li>
+                        <li><span class="lang-en">"Digital transformation is expected but resources are limited"</span><span class="lang-fr">"La transformation digitale est attendue mais les ressources sont limit&eacute;es"</span><span class="lang-pl">"Transformacja cyfrowa jest oczekiwana, ale zasoby s&#261; ograniczone"</span></li>
+                    </ul>
+                </div>
+                <div class="persona-offer">
+                    <h4><span class="lang-en">What we deliver</span><span class="lang-fr">Ce que nous livrons</span><span class="lang-pl">Co dostarczamy</span></h4>
+                    <ul>
+                        <li><span class="lang-en">Quick wins in first month &mdash; visible impact fast</span><span class="lang-fr">Quick wins d&egrave;s le premier mois &mdash; impact visible rapide</span><span class="lang-pl">Szybkie wygrane w pierwszym miesi&#261;cu &mdash; widoczny wp&#322;yw szybko</span></li>
+                        <li><span class="lang-en">Scalable roadmap that grows with the company</span><span class="lang-fr">Roadmap scalable qui grandit avec l'entreprise</span><span class="lang-pl">Skalowalna roadmapa, kt&oacute;ra ro&#347;nie z firm&#261;</span></li>
+                        <li><span class="lang-en">Unified stack replacing duct-tape integrations</span><span class="lang-fr">Stack unifi&eacute; rempla&ccedil;ant les int&eacute;grations bricol&eacute;es</span><span class="lang-pl">Zunifikowany stack zast&#281;puj&#261;cy prowizoryczne integracje</span></li>
+                        <li><span class="lang-en">One partner instead of five vendors</span><span class="lang-fr">Un partenaire au lieu de cinq prestataires</span><span class="lang-pl">Jeden partner zamiast pi&#281;ciu dostawc&oacute;w</span></li>
+                        <li><span class="lang-en">Sourcing next-gen automation profiles &mdash; build the team you need</span><span class="lang-fr">Sourcing de profils automation next-gen &mdash; construisez l'&eacute;quipe dont vous avez besoin</span><span class="lang-pl">Sourcing profili nowej generacji automation &mdash; zbuduj zesp&oacute;&#322;, kt&oacute;rego potrzebujesz</span></li>
+                        <li><span class="lang-en">Agent FinOps &mdash; audit zombie processes before autonomous costs explode</span><span class="lang-fr">Agent FinOps &mdash; audit des processus zombies avant que les co&ucirc;ts autonomes n'explosent</span><span class="lang-pl">Agent FinOps &mdash; audyt proces&oacute;w-zombie zanim koszty autonomiczne eksploduj&#261;</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dir. Marketing -->
+        <div class="persona-card">
+            <div class="persona-sidebar">
+                <h3><span class="lang-en">Dir. Marketing</span><span class="lang-fr">Dir. Marketing</span><span class="lang-pl">Dyr. Marketingu</span></h3>
+                <p class="persona-role"><span class="lang-en">Heads marketing ops &mdash; has data but can't turn it into action fast enough.</span><span class="lang-fr">Dirige les ops marketing &mdash; a les donn&eacute;es mais ne peut pas les transformer en action assez vite.</span><span class="lang-pl">Prowadzi operacje marketingowe &mdash; ma dane, ale nie mo&#380;e ich wystarczaj&#261;co szybko przekszta&#322;ci&#263; w dzia&#322;anie.</span></p>
+                <p class="persona-example">e.g. Sophie Hocquez / Skill&amp;You</p>
+            </div>
+            <div class="persona-body">
+                <div class="persona-pain">
+                    <h4><span class="lang-en">Pain points</span><span class="lang-fr">Points de douleur</span><span class="lang-pl">Wyzwania</span></h4>
+                    <ul>
+                        <li><span class="lang-en">"I have data but can't turn it into actionable campaigns fast enough"</span><span class="lang-fr">"J'ai les donn&eacute;es mais je ne peux pas les transformer en campagnes actionnables assez vite"</span><span class="lang-pl">"Mam dane, ale nie mog&#281; ich wystarczaj&#261;co szybko przekszta&#322;ci&#263; w kampanie"</span></li>
+                        <li><span class="lang-en">"My team spends too much time on reporting instead of strategy"</span><span class="lang-fr">"Mon &eacute;quipe passe trop de temps sur le reporting au lieu de la strat&eacute;gie"</span><span class="lang-pl">"M&oacute;j zesp&oacute;&#322; sp&#281;dza za du&#380;o czasu na raportowaniu zamiast na strategii"</span></li>
+                        <li><span class="lang-en">"Digital transformation is expected but resources are limited"</span><span class="lang-fr">"La transformation digitale est attendue mais les ressources sont limit&eacute;es"</span><span class="lang-pl">"Transformacja cyfrowa jest oczekiwana, ale zasoby s&#261; ograniczone"</span></li>
+                    </ul>
+                </div>
+                <div class="persona-offer">
+                    <h4><span class="lang-en">What we deliver</span><span class="lang-fr">Ce que nous livrons</span><span class="lang-pl">Co dostarczamy</span></h4>
+                    <ul>
+                        <li><span class="lang-en">Automated reporting &mdash; free the team for strategy</span><span class="lang-fr">Reporting automatis&eacute; &mdash; lib&eacute;rez l'&eacute;quipe pour la strat&eacute;gie</span><span class="lang-pl">Zautomatyzowany reporting &mdash; uwolnij zesp&oacute;&#322; do strategii</span></li>
+                        <li><span class="lang-en">Data-to-campaign pipelines that actually ship</span><span class="lang-fr">Des pipelines data-to-campaign qui livrent vraiment</span><span class="lang-pl">Pipeline'y od danych do kampanii, kt&oacute;re naprawd&#281; dowoz&#261;</span></li>
+                        <li><span class="lang-en">Tools built for your workflow, not generic SaaS</span><span class="lang-fr">Des outils construits pour votre workflow, pas du SaaS g&eacute;n&eacute;rique</span><span class="lang-pl">Narz&#281;dzia zbudowane pod Tw&oacute;j workflow, nie generyczny SaaS</span></li>
+                        <li><span class="lang-en">Workshops, training &amp; video upskilling &mdash; hands-on, not theory</span><span class="lang-fr">Ateliers, formations &amp; upskilling vid&eacute;o &mdash; pratique, pas th&eacute;orie</span><span class="lang-pl">Warsztaty, szkolenia &amp; upskilling wideo &mdash; praktyka, nie teoria</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Head Data -->
+        <div class="persona-card">
+            <div class="persona-sidebar">
+                <h3>Head Data / Analytics</h3>
+                <p class="persona-role"><span class="lang-en">Leads data function &mdash; produces insights but they don't reach decision-makers.</span><span class="lang-fr">Dirige la fonction data &mdash; produit des insights qui n'atteignent pas les d&eacute;cideurs.</span><span class="lang-pl">Prowadzi funkcj&#281; data &mdash; produkuje insighty, kt&oacute;re nie docieraj&#261; do decydent&oacute;w.</span></p>
+                <p class="persona-example">e.g. B&eacute;chir Tourki / Skill&amp;You</p>
+            </div>
+            <div class="persona-body">
+                <div class="persona-pain">
+                    <h4><span class="lang-en">Pain points</span><span class="lang-fr">Points de douleur</span><span class="lang-pl">Wyzwania</span></h4>
+                    <ul>
+                        <li><span class="lang-en">"My datalab produces insights but they don't reach decision-makers"</span><span class="lang-fr">"Mon datalab produit des insights mais ils n'atteignent pas les d&eacute;cideurs"</span><span class="lang-pl">"M&oacute;j datalab produkuje insighty, ale nie docieraj&#261; do decydent&oacute;w"</span></li>
+                        <li><span class="lang-en">"We're drowning in requests but lack bandwidth"</span><span class="lang-fr">"Nous sommes noy&eacute;s dans les demandes mais manquons de bande passante"</span><span class="lang-pl">"Toniemy w requestach, ale brakuje nam bandwidth"</span></li>
+                    </ul>
+                </div>
+                <div class="persona-offer">
+                    <h4><span class="lang-en">What we deliver</span><span class="lang-fr">Ce que nous livrons</span><span class="lang-pl">Co dostarczamy</span></h4>
+                    <ul>
+                        <li><span class="lang-en">Insights that feed directly into business decisions</span><span class="lang-fr">Des insights qui alimentent directement les d&eacute;cisions business</span><span class="lang-pl">Insighty zasilaj&#261;ce bezpo&#347;rednio decyzje biznesowe</span></li>
+                        <li><span class="lang-en">Automation of repetitive data requests</span><span class="lang-fr">Automatisation des demandes data r&eacute;p&eacute;titives</span><span class="lang-pl">Automatyzacja powtarzalnych request&oacute;w data</span></li>
+                        <li><span class="lang-en">Clear prioritization framework for incoming demand</span><span class="lang-fr">Framework de priorisation clair pour la demande entrante</span><span class="lang-pl">Jasny framework priorytetyzacji dla nap&#322;ywaj&#261;cych zapotrzebowa&#324;</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════ CTA ═══════ -->
+    <section class="section-cta">
+        <h2><span class="lang-en">The best next step is a conversation.</span><span class="lang-fr">La meilleure prochaine &eacute;tape, c'est une conversation.</span><span class="lang-pl">Najlepszy nast&#281;pny krok to rozmowa.</span></h2>
+        <p class="contact-sub"><span class="lang-en">15 minutes to understand where you stand &mdash; and what you could build next.</span><span class="lang-fr">15 minutes pour comprendre o&ugrave; vous en &ecirc;tes &mdash; et ce que vous pourriez construire ensuite.</span><span class="lang-pl">15 minut, &#380;eby zrozumie&#263;, gdzie jeste&#347; &mdash; i co mo&#380;esz zbudowa&#263; dalej.</span></p>
+        <div class="contact-buttons">
+            <a href="https://wa.me/33784003518" target="_blank" class="btn-wa">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                WhatsApp
+            </a>
+            <a href="mailto:aleksander.dabrowski@gmail.com" class="btn-email">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4L12 13 2 4"/></svg>
+                Email
+            </a>
+        </div>
+    </section>
+
+<script>
+(function() {
+    var urlLang = new URLSearchParams(window.location.search).get('lang');
+    var saved = urlLang || localStorage.getItem('lang') || 'en';
+    if (urlLang) localStorage.setItem('lang', urlLang);
+    if (saved !== 'en') {
+        document.body.classList.add(saved);
+        document.querySelector('.lang-btn.active').classList.remove('active');
+        document.querySelector('.lang-btn[data-lang="' + saved + '"]').classList.add('active');
+    }
+    document.querySelectorAll('.lang-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            var lang = this.dataset.lang;
+            document.body.classList.remove('fr', 'pl');
+            if (lang !== 'en') document.body.classList.add(lang);
+            document.querySelector('.lang-btn.active').classList.remove('active');
+            this.classList.add('active');
+            localStorage.setItem('lang', lang);
+        });
+    });
+})();
+</script>
+
+</body>
+</html>

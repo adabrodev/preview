@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>adabro.ai</title>
+    <link rel="icon" type="image/x-icon" href="https://images.squarespace-cdn.com/content/v1/6702a0ccf51e716b1eaf868d/35f375b1-5445-4110-872d-31448d40979e/favicon.ico?format=100w"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100;0,400;0,700;1,400;1,700&family=Poppins:ital,wght@0,300;0,400;0,700;1,400;1,700">
+    <style>
+        :root {
+            --max-width: 1400px;
+            --gutter: 4vw;
+            --font-heading: 'Urbanist', sans-serif;
+            --font-body: 'Poppins', sans-serif;
+            --color-black: #1a1a1a;
+            --color-white: #ffffff;
+            --color-offwhite: #f7f5f2;
+            --color-gray: #666;
+            --color-light-gray: #999;
+            --color-accent: #8b6cc1;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--color-black);
+            background: var(--color-white);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        img { display: block; max-width: 100%; }
+
+        /* ─── LANGUAGE SWITCHER ─── */
+        .lang-bar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            z-index: 200;
+            display: flex;
+            gap: 2px;
+            padding: 8px 16px;
+            background: rgba(0,0,0,0.5);
+            border-radius: 0 0 0 6px;
+        }
+        .lang-btn {
+            font-family: var(--font-body);
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            padding: 4px 10px;
+            border: 1px solid rgba(255,255,255,0.3);
+            background: transparent;
+            color: rgba(255,255,255,0.6);
+            cursor: pointer;
+            border-radius: 2px;
+            transition: all 0.2s;
+        }
+        .lang-btn:hover { color: #fff; border-color: rgba(255,255,255,0.6); }
+        .lang-btn.active { background: rgba(255,255,255,0.15); color: #fff; border-color: rgba(255,255,255,0.6); }
+
+        /* ─── LANGUAGE VISIBILITY ─── */
+        .lang-fr, .lang-pl { display: none; }
+        .lang-fr-block, .lang-pl-block { display: none; }
+
+        body.fr .lang-en { display: none; }
+        body.fr .lang-fr { display: inline; }
+        body.pl .lang-en { display: none; }
+        body.pl .lang-pl { display: inline; }
+
+        body.fr .lang-en-block { display: none; }
+        body.fr .lang-fr-block { display: block; }
+        body.pl .lang-en-block { display: none; }
+        body.pl .lang-pl-block { display: block; }
+
+        /* ─── HEADER / NAV ─── */
+        .header {
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2vw var(--gutter);
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+
+        .header-logo {
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--color-white);
+            text-decoration: none;
+        }
+
+        .header-nav {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+        }
+
+        .header-nav a {
+            font-family: var(--font-body);
+            font-size: 0.82rem;
+            font-weight: 400;
+            color: rgba(255,255,255,0.65);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .header-nav a:hover { color: var(--color-white); }
+
+        /* ─── HERO SECTION ─── */
+        .section-hero {
+            position: relative;
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 120px var(--gutter) 80px;
+            overflow: hidden;
+        }
+
+        .section-hero .bg-image {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+        }
+
+        .section-hero .bg-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .section-hero .bg-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.1);
+            z-index: 1;
+        }
+
+        .section-hero .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 700px;
+        }
+
+        .section-hero h1 {
+            font-family: var(--font-heading);
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            font-weight: 700;
+            color: var(--color-white);
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .section-hero h3 {
+            font-family: var(--font-heading);
+            font-size: clamp(0.95rem, 1.5vw, 1.15rem);
+            font-weight: 400;
+            color: rgba(255,255,255,0.75);
+            line-height: 1.6;
+        }
+
+        /* ─── BUTTONS (Squarespace-style outline) ─── */
+        .btn {
+            display: inline-block;
+            font-family: var(--font-body);
+            font-size: 0.78rem;
+            font-weight: 400;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            text-decoration: none;
+            padding: 14px 32px;
+            border: 1px solid var(--color-black);
+            color: var(--color-black);
+            transition: all 0.3s;
+        }
+
+        .btn:hover {
+            background: var(--color-black);
+            color: var(--color-white);
+        }
+
+        /* ─── PILLARS ─── */
+        .section-pillars {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 var(--gutter);
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .pillar {
+            padding: 48px 28px;
+            border-right: 1px solid #f0f0f0;
+        }
+
+        .pillar:last-child { border-right: none; }
+
+        .pillar-num {
+            font-family: var(--font-body);
+            font-size: 0.6rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--color-accent);
+            margin-bottom: 14px;
+        }
+
+        .pillar h3 {
+            font-family: var(--font-heading);
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--color-black);
+            margin-bottom: 8px;
+        }
+
+        .pillar p {
+            font-family: var(--font-body);
+            font-size: 0.8rem;
+            font-weight: 300;
+            color: var(--color-light-gray);
+            line-height: 1.65;
+        }
+
+        /* Segments section */
+        .section-segments {
+            background: var(--color-offwhite);
+            padding: 80px var(--gutter);
+        }
+
+        .segments-title {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .segments-title h2 {
+            font-family: var(--font-heading);
+            font-size: clamp(1.4rem, 2.5vw, 2rem);
+            font-weight: 700;
+            color: var(--color-black);
+            margin-bottom: 8px;
+        }
+
+        .segments-title p {
+            font-family: var(--font-body);
+            font-size: 0.88rem;
+            font-weight: 300;
+            color: var(--color-light-gray);
+        }
+
+        .segments-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .seg-col {
+            padding: 44px 36px;
+            background: var(--color-white);
+            border: 1px solid #ece9e4;
+            border-radius: 4px;
+        }
+
+        .seg-icon {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 20px;
+        }
+
+        .seg-icon svg {
+            width: 48px;
+            height: 48px;
+        }
+
+        .segment-label {
+            font-family: var(--font-body);
+            font-size: 0.6rem;
+            font-weight: 700;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 18px;
+        }
+
+        .seg-col:nth-child(1) .segment-label { color: #6b4c9a; }
+        .seg-col:nth-child(1) .seg-icon svg { stroke: #6b4c9a; fill: none; }
+        .seg-col:nth-child(2) .segment-label { color: #2d7d9a; }
+        .seg-col:nth-child(2) .seg-icon svg { stroke: #2d7d9a; fill: none; }
+        .seg-col:nth-child(3) .segment-label { color: #7a9a4c; }
+        .seg-col:nth-child(3) .seg-icon svg { stroke: #7a9a4c; fill: none; }
+
+        .seg-col h3 {
+            font-family: var(--font-heading);
+            font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+            font-weight: 700;
+            line-height: 1.35;
+            color: var(--color-black);
+            margin-bottom: 14px;
+        }
+
+        .seg-pitch {
+            font-size: 0.85rem;
+            font-weight: 300;
+            color: var(--color-gray);
+            line-height: 1.75;
+        }
+
+        .seg-closer {
+            margin-top: 24px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            font-family: var(--font-heading);
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #2a1f3d;
+            line-height: 1.5;
+        }
+
+        .seg-link {
+            display: inline-block;
+            margin-top: 20px;
+            font-family: var(--font-body);
+            font-size: 0.78rem;
+            font-weight: 400;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            text-decoration: none;
+            padding: 10px 24px;
+            border: 1px solid var(--color-black);
+            color: var(--color-black);
+            transition: all 0.3s;
+        }
+
+        .seg-link:hover {
+            background: var(--color-black);
+            color: var(--color-white);
+        }
+
+        /* ─── CONTACT CTA (between segments & trends) ─── */
+        .section-contact {
+            text-align: center;
+            padding: 64px var(--gutter);
+            background: var(--color-white);
+        }
+
+        .section-contact h2 {
+            font-family: var(--font-heading);
+            font-size: clamp(1.4rem, 2.5vw, 2rem);
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .contact-sub {
+            font-size: 0.88rem;
+            font-weight: 300;
+            color: var(--color-light-gray);
+            margin-bottom: 32px;
+        }
+
+        .contact-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn-wa, .btn-email {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-decoration: none;
+            padding: 16px 36px;
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+
+        .btn-wa {
+            background: #25D366;
+            color: #fff;
+            border: 1px solid #25D366;
+        }
+
+        .btn-wa:hover {
+            background: #1ebe57;
+            border-color: #1ebe57;
+        }
+
+        .btn-email {
+            background: none;
+            color: var(--color-black);
+            border: 1px solid var(--color-black);
+        }
+
+        .btn-email:hover {
+            background: var(--color-black);
+            color: var(--color-white);
+        }
+
+        /* ─── CTA SECTION ─── */
+        .section-cta {
+            text-align: center;
+            padding: 80px var(--gutter);
+            background: #1a1a2e;
+            color: var(--color-white);
+        }
+
+        .section-cta h2 {
+            font-family: var(--font-heading);
+            font-size: clamp(1.5rem, 2.8vw, 2.2rem);
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .section-cta p {
+            font-size: 0.88rem;
+            font-weight: 300;
+            color: rgba(255,255,255,0.45);
+            margin-bottom: 36px;
+        }
+
+        .btn-light {
+            display: inline-block;
+            font-family: var(--font-body);
+            font-size: 0.78rem;
+            font-weight: 400;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            text-decoration: none;
+            padding: 14px 32px;
+            border: 1px solid rgba(255,255,255,0.3);
+            color: var(--color-white);
+            transition: all 0.3s;
+        }
+
+        .btn-light:hover {
+            background: rgba(255,255,255,0.08);
+            border-color: rgba(255,255,255,0.6);
+        }
+
+        /* ─── FOOTER ─── */
+        .footer {
+            padding: 40px var(--gutter);
+            text-align: center;
+        }
+
+        .footer p {
+            font-size: 0.82rem;
+            color: var(--color-gray);
+            margin-bottom: 4px;
+        }
+
+        .footer p a {
+            color: var(--color-black);
+            text-decoration: none;
+            font-weight: 400;
+        }
+
+        .footer-social {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 12px;
+        }
+
+        .footer-social a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            color: var(--color-gray);
+            transition: color 0.3s;
+        }
+
+        .footer-social a:hover { color: var(--color-black); }
+
+        .footer-social svg { width: 20px; height: 20px; fill: currentColor; }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 900px) {
+            .header-nav { display: none; }
+
+            .section-split {
+                grid-template-columns: 1fr;
+            }
+
+            .section-split .split-image {
+                min-height: 300px;
+            }
+
+            .section-pillars {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .pillar:nth-child(2) { border-right: none; }
+            .pillar:nth-child(1), .pillar:nth-child(2) { border-bottom: 1px solid #f0f0f0; }
+
+            .segments-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .seg-col {
+                border: 1px solid #ece9e4;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .section-pillars { grid-template-columns: 1fr; }
+            .pillar { border-right: none; border-bottom: 1px solid #f0f0f0; }
+            .pillar:last-child { border-bottom: none; }
+            .seg-col { padding: 32px 24px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ═══════ LANGUAGE SWITCHER ═══════ -->
+    <div class="lang-bar">
+        <button class="lang-btn active" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="fr">FR</button>
+        <button class="lang-btn" data-lang="pl">PL</button>
+    </div>
+
+    <!-- ═══════ HEADER ═══════ -->
+    <header class="header">
+        <a href="https://www.adabroai.com" class="header-logo">adabro.ai</a>
+        <nav>
+            <ul class="header-nav">
+            </ul>
+        </nav>
+    </header>
+
+    <!-- ═══════ HERO (pitch) ═══════ -->
+    <section class="section-hero">
+        <div class="bg-image">
+            <img
+                src="https://images.squarespace-cdn.com/content/v1/6702a0ccf51e716b1eaf868d/1728238187273-TBY65QP0XUJ6ZTE5H45T/unsplash-image-1-AUc8mQWV4.jpg?format=2500w"
+                alt=""
+                loading="eager"
+            >
+        </div>
+        <div class="bg-overlay"></div>
+        <div class="hero-content">
+            <h1>
+                <span class="lang-en">New era, new demands,<br>new consulting.</span>
+                <span class="lang-fr">Nouvelle &#232;re, nouvelles exigences,<br>nouveau consulting.</span>
+                <span class="lang-pl">Nowa era, nowe wymagania,<br>nowy consulting.</span>
+            </h1>
+            <h3>
+                <span class="lang-en">No more skill silos. The line between thinking and building is gone. From strategy to code &#8212; one partner across every layer.</span>
+                <span class="lang-fr">Fini les silos de comp&#233;tences. La ligne entre penser et construire a disparu. De la strat&#233;gie au code &#8212; un seul interlocuteur sur toutes les couches.</span>
+                <span class="lang-pl">Koniec z silosami kompetencji. Granica mi&#281;dzy my&#347;leniem a budowaniem znikn&#281;&#322;a. Od strategii do kodu &#8212; jeden partner na ka&#380;dym poziomie.</span>
+            </h3>
+        </div>
+    </section>
+
+    <!-- ═══════ 3 SEGMENTS ═══════ -->
+    <section class="section-segments">
+        <div class="segments-title">
+            <h2>
+                <span class="lang-en">Built for builders.</span>
+                <span class="lang-fr">Une offre construite pour ceux qui construisent.</span>
+                <span class="lang-pl">Propozycja zbudowana dla tych, kt&#243;rzy buduj&#261;.</span>
+            </h2>
+            <p>
+                <span class="lang-en">Three segments, one philosophy: think and build.</span>
+                <span class="lang-fr">Trois segments, une philosophie : penser et construire.</span>
+                <span class="lang-pl">Trzy segmenty, jedna filozofia: my&#347;l i buduj.</span>
+            </p>
+        </div>
+
+        <div class="segments-grid">
+            <div class="seg-col">
+                <div class="seg-icon"><svg viewBox="0 0 48 48" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="12" width="14" height="28"/><rect x="26" y="6" width="14" height="34"/><line x1="12" y1="18" x2="18" y2="18"/><line x1="12" y1="24" x2="18" y2="24"/><line x1="12" y1="30" x2="18" y2="30"/><line x1="30" y1="12" x2="36" y2="12"/><line x1="30" y1="18" x2="36" y2="18"/><line x1="30" y1="24" x2="36" y2="24"/><line x1="30" y1="30" x2="36" y2="30"/><line x1="4" y1="40" x2="44" y2="40"/></svg></div>
+                <div class="segment-label">
+                    <span class="lang-en">Large Companies</span>
+                    <span class="lang-fr">Grandes Entreprises</span>
+                    <span class="lang-pl">Du&#380;e Firmy</span>
+                </div>
+                <h3>
+                    <span class="lang-en">From pilots to production &#8212; with someone who's done it.</span>
+                    <span class="lang-fr">Du pilote &#224; la production &#8212; avec quelqu'un qui l'a d&#233;j&#224; fait.</span>
+                    <span class="lang-pl">Od pilota&#380;u do produkcji &#8212; z kim&#347;, kto to ju&#380; robi&#322;.</span>
+                </h3>
+                <p class="seg-pitch">
+                    <span class="lang-en">Bridge between business &amp; IT. POC-to-production, governance, ROI that speaks to the board.</span>
+                    <span class="lang-fr">Pont entre business et IT. Du POC &#224; la production, gouvernance, ROI qui parle au board.</span>
+                    <span class="lang-pl">Pomost mi&#281;dzy biznesem a IT. Od POC do produkcji, governance, ROI zrozumia&#322;e dla zarz&#261;du.</span>
+                </p>
+                <p class="seg-closer">
+                    <span class="lang-en">From strategy to code &#8212; one partner.</span>
+                    <span class="lang-fr">De la strat&#233;gie au code &#8212; un seul partenaire.</span>
+                    <span class="lang-pl">Od strategii do kodu &#8212; jeden partner.</span>
+                </p>
+                <a href="large.html" class="seg-link">
+                    <span class="lang-en">Learn more &#8594;</span>
+                    <span class="lang-fr">En savoir plus &#8594;</span>
+                    <span class="lang-pl">Dowiedz si&#281; wi&#281;cej &#8594;</span>
+                </a>
+            </div>
+            <div class="seg-col">
+                <div class="seg-icon"><svg viewBox="0 0 48 48" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="24" y1="40" x2="24" y2="10"/><polyline points="16,18 24,10 32,18"/><line x1="14" y1="40" x2="34" y2="40"/><circle cx="14" cy="34" r="3"/><circle cx="34" cy="34" r="3"/></svg></div>
+                <div class="segment-label">
+                    <span class="lang-en">Medium Companies</span>
+                    <span class="lang-fr">Entreprises Moyennes</span>
+                    <span class="lang-pl">&#346;rednie Firmy</span>
+                </div>
+                <h3>
+                    <span class="lang-en">The race is accelerating. New levers are emerging.</span>
+                    <span class="lang-fr">La course acc&#233;l&#232;re. De nouveaux leviers apparaissent.</span>
+                    <span class="lang-pl">Wy&#347;cig przyspiesza. Pojawiaj&#261; si&#281; nowe d&#378;wignie.</span>
+                </h3>
+                <p class="seg-pitch">
+                    <span class="lang-en">Quick wins, scalable roadmap, and someone who does both.</span>
+                    <span class="lang-fr">Quick wins, roadmap scalable, et quelqu'un qui fait les deux.</span>
+                    <span class="lang-pl">Szybkie wygrane, skalowalna roadmapa i kto&#347;, kto robi jedno i drugie.</span>
+                </p>
+                <p class="seg-closer">
+                    <span class="lang-en">No need for five vendors. One who thinks and builds.</span>
+                    <span class="lang-fr">Pas besoin de cinq prestataires. Un qui pense et construit.</span>
+                    <span class="lang-pl">Nie potrzebujesz pi&#281;ciu dostawc&#243;w. Jeden, kt&#243;ry my&#347;li i buduje.</span>
+                </p>
+                <a href="medium.html" class="seg-link">
+                    <span class="lang-en">Learn more &#8594;</span>
+                    <span class="lang-fr">En savoir plus &#8594;</span>
+                    <span class="lang-pl">Dowiedz si&#281; wi&#281;cej &#8594;</span>
+                </a>
+            </div>
+            <div class="seg-col">
+                <div class="seg-icon"><svg viewBox="0 0 48 48" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="12,16 6,24 12,32"/><polyline points="36,16 42,24 36,32"/><line x1="28" y1="12" x2="20" y2="36"/><circle cx="24" cy="6" r="2"/><circle cx="16" cy="6" r="2"/><circle cx="32" cy="6" r="2"/></svg></div>
+                <div class="segment-label">
+                    <span class="lang-en">Small Companies &amp; Solo</span>
+                    <span class="lang-fr">Petites Entreprises &amp; Solo</span>
+                    <span class="lang-pl">Ma&#322;e Firmy &amp; Solo</span>
+                </div>
+                <h3>
+                    <span class="lang-en">Your Personal Intelligence System.</span>
+                    <span class="lang-fr">Votre Syst&#232;me d'Intelligence Personnelle.</span>
+                    <span class="lang-pl">Tw&#243;j System Osobistej Inteligencji.</span>
+                </h3>
+                <p class="seg-pitch">
+                    <span class="lang-en">Prospection, marketing, trend monitoring, custom tools &#8212; all connected, all yours.</span>
+                    <span class="lang-fr">Prospection, marketing, veille, outils sur mesure &#8212; tout connect&#233;, tout &#224; vous.</span>
+                    <span class="lang-pl">Prospecting, marketing, monitoring trend&#243;w, narz&#281;dzia na miar&#281; &#8212; wszystko po&#322;&#261;czone, wszystko Twoje.</span>
+                </p>
+                <p class="seg-closer">
+                    <span class="lang-en">We build it together. You run it alone.</span>
+                    <span class="lang-fr">On construit ensemble. Vous faites tourner seul.</span>
+                    <span class="lang-pl">Budujemy razem. Prowadzisz samodzielnie.</span>
+                </p>
+                <a href="small.html" class="seg-link">
+                    <span class="lang-en">Learn more &#8594;</span>
+                    <span class="lang-fr">En savoir plus &#8594;</span>
+                    <span class="lang-pl">Dowiedz si&#281; wi&#281;cej &#8594;</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════ CTA — CONTACT ═══════ -->
+    <section class="section-contact">
+        <h2>
+            <span class="lang-en">The best next step is a conversation.</span>
+            <span class="lang-fr">La meilleure prochaine &#233;tape, c'est une conversation.</span>
+            <span class="lang-pl">Najlepszy nast&#281;pny krok to rozmowa.</span>
+        </h2>
+        <p class="contact-sub">
+            <span class="lang-en">15 minutes to understand where you stand &#8212; and what you could build next.</span>
+            <span class="lang-fr">15 minutes pour comprendre o&#249; vous en &#234;tes &#8212; et ce que vous pourriez construire ensuite.</span>
+            <span class="lang-pl">15 minut, &#380;eby zrozumie&#263;, gdzie jeste&#347; &#8212; i co mo&#380;esz zbudowa&#263; dalej.</span>
+        </p>
+        <div class="contact-buttons">
+            <a href="https://wa.me/33784003518" target="_blank" class="btn-wa">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                WhatsApp
+            </a>
+            <a href="mailto:aleksander.dabrowski@gmail.com" class="btn-email">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4L12 13 2 4"/></svg>
+                Email
+            </a>
+        </div>
+    </section>
+
+    <!-- ═══════ CTA ═══════ -->
+    <section class="section-cta">
+        <h2>
+            <span class="lang-en">Let's talk about your situation.</span>
+            <span class="lang-fr">Parlons de votre situation.</span>
+            <span class="lang-pl">Porozmawiajmy o Twojej sytuacji.</span>
+        </h2>
+        <p>
+            <span class="lang-en">Builder? Let's build.</span>
+            <span class="lang-fr">Builder ? Construisons.</span>
+            <span class="lang-pl">Builder? Budujmy.</span>
+        </p>
+        <a href="mailto:adabrowski@adabro.ai" class="btn-light">
+            <span class="lang-en">Get in touch</span>
+            <span class="lang-fr">Contactez-moi</span>
+            <span class="lang-pl">Napisz do mnie</span>
+        </a>
+    </section>
+
+    <!-- ═══════ FOOTER ═══════ -->
+    <footer class="footer">
+        <p><a href="https://www.linkedin.com/in/aleksanderdabrowski/" target="_blank">Contact</a></p>
+        <p>adabrowski@adabro.ai</p>
+        <div class="footer-social">
+            <a href="https://www.linkedin.com/in/aleksanderdabrowski/" target="_blank" aria-label="LinkedIn">
+                <svg viewBox="0 0 64 64"><path d="M20.4,44h5.4V26.6h-5.4V44z M23.1,18c-1.7,0-3.1,1.4-3.1,3.1c0,1.7,1.4,3.1,3.1,3.1 c1.7,0,3.1-1.4,3.1-3.1C26.2,19.4,24.8,18,23.1,18z M39.5,26.2c-2.6,0-4.4,1.4-5.1,2.8h-0.1v-2.4h-5.2V44h5.4v-8.6 c0-2.3,0.4-4.5,3.2-4.5c2.8,0,2.8,2.6,2.8,4.6V44H46v-9.5C46,29.8,45,26.2,39.5,26.2z"/></svg>
+            </a>
+            <a href="https://www.youtube.com/@adabroai" target="_blank" aria-label="YouTube">
+                <svg viewBox="0 0 64 64"><path d="M46.7,26c0,0-0.3-2.1-1.2-3c-1.1-1.2-2.4-1.2-3-1.3C38.3,21.4,32,21.4,32,21.4h0c0,0-6.3,0-10.5,0.3c-0.6,0.1-1.9,0.1-3,1.3c-0.9,0.9-1.2,3-1.2,3S17,28.4,17,30.9v2.3c0,2.4,0.3,4.9,0.3,4.9s0.3,2.1,1.2,3c1.1,1.2,2.6,1.2,3.3,1.3c2.4,0.2,10.2,0.3,10.2,0.3s6.3,0,10.5-0.3c0.6-0.1,1.9-0.1,3-1.3c0.9-0.9,1.2-3,1.2-3s0.3-2.4,0.3-4.9v-2.3C47,28.4,46.7,26,46.7,26z M28.9,35.9l0-8.4l8.1,4.2L28.9,35.9z"/></svg>
+            </a>
+        </div>
+    </footer>
+
+    <!-- ═══════ LANGUAGE SWITCHER JS ═══════ -->
+    <script>
+    (function() {
+        var urlLang = new URLSearchParams(window.location.search).get('lang');
+        var saved = urlLang || localStorage.getItem('lang') || 'en';
+        if (urlLang) localStorage.setItem('lang', urlLang);
+        if (saved !== 'en') {
+            document.body.classList.add(saved);
+            document.querySelector('.lang-btn.active').classList.remove('active');
+            document.querySelector('.lang-btn[data-lang="' + saved + '"]').classList.add('active');
+        }
+        document.querySelectorAll('.lang-btn').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                var lang = this.dataset.lang;
+                document.body.classList.remove('fr', 'pl');
+                if (lang !== 'en') document.body.classList.add(lang);
+                document.querySelector('.lang-btn.active').classList.remove('active');
+                this.classList.add('active');
+                localStorage.setItem('lang', lang);
+            });
+        });
+    })();
+    </script>
+
+</body>
+</html>

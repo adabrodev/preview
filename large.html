@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>adabro.ai — Large Companies</title>
+    <link rel="icon" type="image/x-icon" href="https://images.squarespace-cdn.com/content/v1/6702a0ccf51e716b1eaf868d/35f375b1-5445-4110-872d-31448d40979e/favicon.ico?format=100w"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100;0,400;0,600;0,700;1,400&family=Poppins:ital,wght@0,300;0,400;0,600;0,700;1,400">
+    <style>
+        :root {
+            --max-width: 1200px;
+            --gutter: 4vw;
+            --font-heading: 'Urbanist', sans-serif;
+            --font-body: 'Poppins', sans-serif;
+            --color-black: #1a1a1a;
+            --color-white: #ffffff;
+            --color-offwhite: #f7f5f2;
+            --color-gray: #666;
+            --color-light-gray: #999;
+            --color-accent: #8b6cc1;
+            --color-segment: #6b4c9a;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--color-black);
+            background: var(--color-white);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ─── LANG SWITCHER ─── */
+        .lang-bar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            z-index: 200;
+            display: flex;
+            gap: 2px;
+            padding: 8px 16px;
+            background: rgba(0,0,0,0.7);
+            border-radius: 0 0 0 6px;
+        }
+        .lang-btn {
+            font-family: var(--font-body);
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            padding: 4px 10px;
+            border: 1px solid rgba(255,255,255,0.3);
+            background: transparent;
+            color: rgba(255,255,255,0.6);
+            cursor: pointer;
+            border-radius: 2px;
+            transition: all 0.2s;
+        }
+        .lang-btn:hover { color: #fff; border-color: rgba(255,255,255,0.6); }
+        .lang-btn.active { background: rgba(255,255,255,0.15); color: #fff; border-color: rgba(255,255,255,0.6); }
+
+        /* Language visibility */
+        .lang-fr, .lang-pl { display: none; }
+        body.fr .lang-en { display: none; }
+        body.fr .lang-fr { display: inline; }
+        body.pl .lang-en { display: none; }
+        body.pl .lang-pl { display: inline; }
+        .lang-fr-block, .lang-pl-block { display: none; }
+        body.fr .lang-fr-block { display: block; }
+        body.fr .lang-en-block { display: none; }
+        body.pl .lang-pl-block { display: block; }
+        body.pl .lang-en-block { display: none; }
+
+        /* ─── BACK NAV ─── */
+        .back-nav {
+            padding: 20px var(--gutter);
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+
+        .back-nav a {
+            font-family: var(--font-body);
+            font-size: 0.8rem;
+            font-weight: 400;
+            color: var(--color-light-gray);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .back-nav a:hover { color: var(--color-black); }
+
+        /* ─── SEGMENT HERO ─── */
+        .segment-hero {
+            padding: 60px var(--gutter) 60px;
+            text-align: center;
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+
+        .segment-label {
+            font-family: var(--font-body);
+            font-size: 0.6rem;
+            font-weight: 700;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--color-segment);
+            margin-bottom: 16px;
+        }
+
+        .segment-hero h1 {
+            font-family: var(--font-heading);
+            font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .segment-hero .pitch {
+            font-size: 1rem;
+            font-weight: 300;
+            color: var(--color-gray);
+            max-width: 600px;
+            margin: 0 auto 16px;
+            line-height: 1.8;
+        }
+
+        .segment-hero .closer {
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #2a1f3d;
+        }
+
+        /* ─── VERBATIMS BAR ─── */
+        .verbatims-bar {
+            background: var(--color-offwhite);
+            padding: 48px var(--gutter);
+        }
+
+        .verbatims-inner {
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+
+        .verbatim-spectrum {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            padding: 0 4px;
+        }
+
+        .spectrum-label {
+            font-family: var(--font-body);
+            font-size: 0.55rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--color-light-gray);
+        }
+
+        .spectrum-line {
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(to right, #c4956a, #aaa, #6b8cba);
+            margin: 0 16px;
+            opacity: 0.35;
+        }
+
+        .verbatims-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .verbatim-card {
+            background: var(--color-white);
+            border: 1px solid #ece9e4;
+            border-top: 3px solid var(--accent, #ece9e4);
+            padding: 28px 24px;
+            border-radius: 2px;
+        }
+
+        .verbatim-card:nth-child(1) { --accent: #c4956a; }
+        .verbatim-card:nth-child(2) { --accent: #b49a7e; }
+        .verbatim-card:nth-child(3) { --accent: #9a9a94; }
+        .verbatim-card:nth-child(4) { --accent: #8a96a2; }
+        .verbatim-card:nth-child(5) { --accent: #7a90ae; }
+        .verbatim-card:nth-child(6) { --accent: #6b8cba; }
+
+        .verbatim-card .v-label {
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--accent, var(--color-segment));
+            margin-bottom: 10px;
+        }
+
+        .verbatim-card .v-text {
+            font-family: var(--font-heading);
+            font-size: 0.95rem;
+            font-weight: 400;
+            font-style: italic;
+            color: var(--color-black);
+            line-height: 1.6;
+        }
+
+        /* ─── PERSONA OVERVIEW ─── */
+        .persona-overview {
+            padding: 60px var(--gutter);
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+
+        .persona-overview h2 {
+            font-family: var(--font-heading);
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .persona-overview .section-sub {
+            font-size: 0.85rem;
+            color: var(--color-light-gray);
+            margin-bottom: 40px;
+        }
+
+        .overview-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 20px;
+        }
+
+        .overview-card {
+            border: 1px solid #ece9e4;
+            padding: 28px 24px;
+            border-radius: 2px;
+        }
+
+        .overview-card h3 {
+            font-family: var(--font-heading);
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .overview-card p {
+            font-size: 0.82rem;
+            font-weight: 300;
+            color: var(--color-gray);
+            line-height: 1.6;
+        }
+
+        @media (max-width: 900px) {
+            .overview-grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        @media (max-width: 600px) {
+            .overview-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ─── PERSONAS ─── */
+        .personas-section {
+            padding: 60px var(--gutter);
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+
+        .personas-section h2 {
+            font-family: var(--font-heading);
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .personas-section .section-sub {
+            font-size: 0.85rem;
+            color: var(--color-light-gray);
+            margin-bottom: 40px;
+        }
+
+        .persona-card {
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            gap: 0;
+            border: 1px solid #ece9e4;
+            margin-bottom: 24px;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .persona-sidebar {
+            padding: 32px 28px;
+            border-right: 1px solid #ece9e4;
+        }
+
+        .persona-sidebar h3 {
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .persona-sidebar .persona-role {
+            font-size: 0.78rem;
+            font-weight: 300;
+            color: var(--color-light-gray);
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .persona-sidebar .persona-example {
+            font-size: 0.72rem;
+            font-weight: 400;
+            color: var(--color-gray);
+            padding-top: 16px;
+            border-top: 1px solid #eee;
+        }
+
+        .persona-body {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+        }
+
+        .persona-pain, .persona-offer { padding: 28px; }
+
+        .persona-pain {
+            border-right: 1px solid #ece9e4;
+            background: #fdfcfa;
+        }
+
+        .persona-pain h4, .persona-offer h4 {
+            font-family: var(--font-body);
+            font-size: 0.62rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        .persona-pain h4 { color: #c0392b; }
+        .persona-offer h4 { color: var(--color-accent); }
+
+        .persona-pain ul, .persona-offer ul { list-style: none; padding: 0; }
+
+        .persona-pain li, .persona-offer li {
+            font-size: 0.82rem;
+            font-weight: 300;
+            color: var(--color-gray);
+            line-height: 1.65;
+            padding: 6px 0;
+            padding-left: 16px;
+            position: relative;
+        }
+
+        .persona-pain li::before {
+            content: "\2014";
+            position: absolute;
+            left: 0;
+            color: #ddd;
+        }
+
+        .persona-offer li::before {
+            content: "\2192";
+            position: absolute;
+            left: 0;
+            color: var(--color-accent);
+        }
+
+        /* ─── CTA ─── */
+        .section-cta {
+            text-align: center;
+            padding: 64px var(--gutter);
+            background: var(--color-white);
+        }
+
+        .section-cta h2 {
+            font-family: var(--font-heading);
+            font-size: clamp(1.4rem, 2.5vw, 2rem);
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .contact-sub {
+            font-size: 0.88rem;
+            font-weight: 300;
+            color: var(--color-light-gray);
+            margin-bottom: 32px;
+        }
+
+        .contact-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn-wa, .btn-email {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-decoration: none;
+            padding: 16px 36px;
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+
+        .btn-wa {
+            background: #25D366;
+            color: #fff;
+            border: 1px solid #25D366;
+        }
+
+        .btn-wa:hover { background: #1ebe57; border-color: #1ebe57; }
+
+        .btn-email {
+            background: none;
+            color: var(--color-black);
+            border: 1px solid var(--color-black);
+        }
+
+        .btn-email:hover { background: var(--color-black); color: var(--color-white); }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 900px) {
+            .persona-card { grid-template-columns: 1fr; }
+            .persona-sidebar { border-right: none; border-bottom: 1px solid #ece9e4; }
+            .persona-body { grid-template-columns: 1fr; }
+            .persona-pain { border-right: none; border-bottom: 1px solid #ece9e4; }
+        }
+
+        @media (max-width: 600px) {
+            .verbatims-grid { grid-template-columns: 1fr; }
+            .verbatim-spectrum { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="lang-bar">
+        <button class="lang-btn active" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="fr">FR</button>
+        <button class="lang-btn" data-lang="pl">PL</button>
+    </div>
+
+    <!-- ═══════ BACK NAV ═══════ -->
+    <nav class="back-nav">
+        <a href="website-pitch.html"><span class="lang-en">&larr; Back to overview</span><span class="lang-fr">&larr; Retour &agrave; l'aper&ccedil;u</span><span class="lang-pl">&larr; Powr&oacute;t do przegl&#x105;du</span></a>
+    </nav>
+
+    <!-- ═══════ SEGMENT HERO ═══════ -->
+    <div class="segment-hero">
+        <div class="segment-label"><span class="lang-en">Large Companies</span><span class="lang-fr">Grandes Entreprises</span><span class="lang-pl">Du&#x17C;e Firmy</span></div>
+        <h1><span class="lang-en">From pilots to production &mdash; with someone who's done it.</span><span class="lang-fr">Du pilote &agrave; la production &mdash; avec quelqu'un qui l'a d&eacute;j&agrave; fait.</span><span class="lang-pl">Od pilota&#x17C;u do produkcji &mdash; z kim&#x15B;, kto to ju&#x17C; robi&#x142;.</span></h1>
+        <p class="pitch"><span class="lang-en">Bridge between business &amp; IT. POC-to-production, governance, ROI that speaks to the board.</span><span class="lang-fr">Pont entre business et IT. Du POC &agrave; la production, gouvernance, ROI qui parle au board.</span><span class="lang-pl">Pomost mi&#x119;dzy biznesem a IT. Od POC do produkcji, governance, ROI zrozumia&#x142;e dla zarz&#x105;du.</span></p>
+        <p class="closer"><span class="lang-en">From strategy to code &mdash; one partner.</span><span class="lang-fr">De la strat&eacute;gie au code &mdash; un seul partenaire.</span><span class="lang-pl">Od strategii do kodu &mdash; jeden partner.</span></p>
+    </div>
+
+    <!-- ═══════ OFFENSIVE VERBATIMS ═══════ -->
+    <div class="verbatims-bar">
+        <div class="verbatims-inner">
+            <div class="verbatim-spectrum">
+                <span class="spectrum-label"><span class="lang-en">Business</span><span class="lang-fr">Business</span><span class="lang-pl">Biznes</span></span>
+                <div class="spectrum-line"></div>
+                <span class="spectrum-label"><span class="lang-en">Tech</span><span class="lang-fr">Tech</span><span class="lang-pl">Tech</span></span>
+            </div>
+            <div class="verbatims-grid">
+                <div class="verbatim-card">
+                    <div class="v-label"><span class="lang-en">Strategy &amp; Scale</span><span class="lang-fr">Strat&eacute;gie &amp; Scale</span><span class="lang-pl">Strategia &amp; Skala</span></div>
+                    <p class="v-text"><span class="lang-en">&ldquo;Scale AI from pilot to competitive edge &mdash; before your market catches up.&rdquo;</span><span class="lang-fr">&ldquo;Scalez l'IA du pilote &agrave; l'avantage concurrentiel &mdash; avant que votre march&eacute; ne vous rattrape.&rdquo;</span><span class="lang-pl">&ldquo;Skaluj AI od pilota&#x17C;u do przewagi konkurencyjnej &mdash; zanim rynek Ci&#x119; dogoni.&rdquo;</span></p>
+                </div>
+                <div class="verbatim-card">
+                    <div class="v-label"><span class="lang-en">ROI &amp; Impact</span><span class="lang-fr">ROI &amp; Impact</span><span class="lang-pl">ROI &amp; Wp&#x142;yw</span></div>
+                    <p class="v-text"><span class="lang-en">&ldquo;ROI you can show the board &mdash; not a promise, a dashboard.&rdquo;</span><span class="lang-fr">&ldquo;Un ROI &agrave; montrer au board &mdash; pas une promesse, un dashboard.&rdquo;</span><span class="lang-pl">&ldquo;ROI, kt&oacute;re poka&#x17C;esz zarz&#x105;dowi &mdash; nie obietnica, a dashboard.&rdquo;</span></p>
+                </div>
+                <div class="verbatim-card">
+                    <div class="v-label"><span class="lang-en">Data to Decision</span><span class="lang-fr">De la Donn&eacute;e &agrave; la D&eacute;cision</span><span class="lang-pl">Od Danych do Decyzji</span></div>
+                    <p class="v-text"><span class="lang-en">&ldquo;From data to decision in days, not quarters. Campaigns that move at market speed.&rdquo;</span><span class="lang-fr">&ldquo;De la donn&eacute;e &agrave; la d&eacute;cision en jours, pas en trimestres. Des campagnes au rythme du march&eacute;.&rdquo;</span><span class="lang-pl">&ldquo;Od danych do decyzji w dni, nie kwarta&#x142;y. Kampanie w tempie rynku.&rdquo;</span></p>
+                </div>
+                <div class="verbatim-card">
+                    <div class="v-label"><span class="lang-en">Tech&ndash;Business Alignment</span><span class="lang-fr">Alignement Tech&ndash;Business</span><span class="lang-pl">Sp&oacute;jno&#x15B;&#x107; Tech&ndash;Biznes</span></div>
+                    <p class="v-text"><span class="lang-en">&ldquo;Tech and business speak the same language. AI use cases ship, not stall.&rdquo;</span><span class="lang-fr">&ldquo;Tech et business parlent la m&ecirc;me langue. Les cas d'usage IA livrent, pas stagnent.&rdquo;</span><span class="lang-pl">&ldquo;Tech i biznes m&oacute;wi&#x105; tym samym j&#x119;zykiem. Przypadki u&#x17C;ycia AI dowo&#x17C;&#x105;, nie utykaj&#x105;.&rdquo;</span></p>
+                </div>
+                <div class="verbatim-card">
+                    <div class="v-label"><span class="lang-en">Tech &amp; Integration</span><span class="lang-fr">Tech &amp; Int&eacute;gration</span><span class="lang-pl">Tech &amp; Integracja</span></div>
+                    <p class="v-text"><span class="lang-en">&ldquo;A unified stack that compounds &mdash; every integration makes the next one faster.&rdquo;</span><span class="lang-fr">&ldquo;Un stack unifi&eacute; qui s'acc&eacute;l&egrave;re &mdash; chaque int&eacute;gration rend la suivante plus rapide.&rdquo;</span><span class="lang-pl">&ldquo;Zunifikowany stack, kt&oacute;ry si&#x119; kumuluje &mdash; ka&#x17C;da integracja przyspiesza nast&#x119;pn&#x105;.&rdquo;</span></p>
+                </div>
+                <div class="verbatim-card">
+                    <div class="v-label"><span class="lang-en">Adoption &amp; Enablement</span><span class="lang-fr">Adoption &amp; Mont&eacute;e en Comp&eacute;tences</span><span class="lang-pl">Adopcja &amp; Rozw&oacute;j Kompetencji</span></div>
+                    <p class="v-text"><span class="lang-en">&ldquo;Your best people get hands-on with the tools &mdash; not a slide deck, a working session.&rdquo;</span><span class="lang-fr">&ldquo;Vos meilleurs talents pratiquent les outils &mdash; pas un PowerPoint, une session de travail.&rdquo;</span><span class="lang-pl">&ldquo;Twoi najlepsi ludzie pracuj&#x105; z narz&#x119;dziami &mdash; nie prezentacja, a sesja robocza.&rdquo;</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════ PERSONA OVERVIEW ═══════ -->
+    <div class="persona-overview">
+        <h2><span class="lang-en">Who we work with</span><span class="lang-fr">Avec qui nous travaillons</span><span class="lang-pl">Z kim pracujemy</span></h2>
+        <p class="section-sub"><span class="lang-en">Key personas in large organizations &mdash; and what we solve for each.</span><span class="lang-fr">Personas cl&eacute;s dans les grandes organisations &mdash; et ce que nous r&eacute;solvons pour chacune.</span><span class="lang-pl">Kluczowe persony w du&#x17C;ych organizacjach &mdash; i co rozwi&#x105;zujemy dla ka&#x17C;dej.</span></p>
+        <div class="overview-grid">
+            <div class="overview-card">
+                <h3>Chief Data Officer</h3>
+                <p><span class="lang-en">Scaling AI from pilots to production across the organization.</span><span class="lang-fr">Scaler l'IA des pilotes &agrave; la production dans toute l'organisation.</span><span class="lang-pl">Skalowanie AI od pilota&#x17C;y do produkcji w ca&#x142;ej organizacji.</span></p>
+            </div>
+            <div class="overview-card">
+                <h3>Chief AI Officer</h3>
+                <p><span class="lang-en">Driving AI adoption beyond early adopters to the wider organization.</span><span class="lang-fr">Porter l'adoption de l'IA au-del&agrave; des early adopters vers toute l'organisation.</span><span class="lang-pl">Nap&#x119;dzanie adopcji AI poza early adopters do ca&#x142;ej organizacji.</span></p>
+            </div>
+            <div class="overview-card">
+                <h3>Chief Marketing Officer</h3>
+                <p><span class="lang-en">Turning data into campaigns that ship at market speed.</span><span class="lang-fr">Transformer les donn&eacute;es en campagnes qui livrent au rythme du march&eacute;.</span><span class="lang-pl">Przekszta&#x142;canie danych w kampanie, kt&oacute;re dowo&#x17C;&#x105; w tempie rynku.</span></p>
+            </div>
+            <div class="overview-card">
+                <h3><span class="lang-en">Group Executive</span><span class="lang-fr">Dirigeant Groupe</span><span class="lang-pl">Dyrektor Grupy</span></h3>
+                <p><span class="lang-en">Building a clear AI strategy that delivers competitive advantage.</span><span class="lang-fr">Construire une strat&eacute;gie IA claire qui d&eacute;livre un avantage concurrentiel.</span><span class="lang-pl">Budowanie jasnej strategii AI, kt&oacute;ra daje przewag&#x119; konkurencyjn&#x105;.</span></p>
+            </div>
+            <div class="overview-card">
+                <h3>Head of Data</h3>
+                <p><span class="lang-en">Connecting insights to business decisions at scale.</span><span class="lang-fr">Connecter les insights aux d&eacute;cisions business &agrave; l'&eacute;chelle.</span><span class="lang-pl">&#x141;&#x105;czenie insight&oacute;w z decyzjami biznesowymi na skal&#x119;.</span></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════ PERSONAS (DETAIL) ═══════ -->
+    <div class="personas-section">
+
+        <!-- CDO -->
+        <div class="persona-card">
+            <div class="persona-sidebar">
+                <h3><span class="lang-en">CDO</span><span class="lang-fr">CDO</span><span class="lang-pl">CDO</span></h3>
+                <p class="persona-role"><span class="lang-en">Chief Data Officer &mdash; owns data strategy, governance, and AI industrialization.</span><span class="lang-fr">Chief Data Officer &mdash; propri&eacute;taire de la strat&eacute;gie data, gouvernance et industrialisation de l'IA.</span><span class="lang-pl">Chief Data Officer &mdash; odpowiada za strategi&#x119; danych, governance i industrializacj&#x119; AI.</span></p>
+            </div>
+            <div class="persona-body">
+                <div class="persona-pain">
+                    <h4><span class="lang-en">Pain points</span><span class="lang-fr">Points de douleur</span><span class="lang-pl">Wyzwania</span></h4>
+                    <ul>
+                        <li><span class="lang-en">Pilots that never reach production</span><span class="lang-fr">Des pilotes qui n'atteignent jamais la production</span><span class="lang-pl">Pilota&#x17C;e, kt&oacute;re nigdy nie wchodz&#x105; na produkcj&#x119;</span></li>
+                        <li><span class="lang-en">Fragmented data landscape, no unified vision</span><span class="lang-fr">Paysage data fragment&eacute;, pas de vision unifi&eacute;e</span><span class="lang-pl">Fragmentaryczny krajobraz danych, brak sp&oacute;jnej wizji</span></li>
+                        <li><span class="lang-en">AI governance expected but no framework in place</span><span class="lang-fr">Gouvernance IA attendue mais aucun framework en place</span><span class="lang-pl">Oczekiwana governance AI, ale brak frameworku</span></li>
+                    </ul>
+                </div>
+                <div class="persona-offer">
+                    <h4><span class="lang-en">What we deliver</span><span class="lang-fr">Ce que nous livrons</span><span class="lang-pl">Co dostarczamy</span></h4>
+                    <ul>
+                        <li><span class="lang-en">POC-to-production roadmap with clear milestones</span><span class="lang-fr">Roadmap POC-to-production avec des jalons clairs</span><span class="lang-pl">Roadmapa od POC do produkcji z jasnymi kamieniami milowymi</span></li>
+                        <li><span class="lang-en">Data architecture alignment across business units</span><span class="lang-fr">Alignement de l'architecture data entre les business units</span><span class="lang-pl">Sp&oacute;jno&#x15B;&#x107; architektury danych mi&#x119;dzy jednostkami biznesowymi</span></li>
+                        <li><span class="lang-en">AI governance framework tailored to org maturity</span><span class="lang-fr">Framework de gouvernance IA adapt&eacute; &agrave; la maturit&eacute; de l'organisation</span><span class="lang-pl">Framework governance AI dopasowany do dojrza&#x142;o&#x15B;ci organizacji</span></li>
+                        <li><span class="lang-en">Agent FinOps &mdash; audit zombie processes before autonomous costs explode</span><span class="lang-fr">Agent FinOps &mdash; audit des processus zombies avant que les co&ucirc;ts autonomes n'explosent</span><span class="lang-pl">Agent FinOps &mdash; audyt proces&oacute;w-zombie zanim koszty autonomiczne eksploduj&#x105;</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- CAIO -->
+        <div class="persona-card">
+            <div class="persona-sidebar">
+                <h3><span class="lang-en">CAIO</span><span class="lang-fr">CAIO</span><span class="lang-pl">CAIO</span></h3>
+                <p class="persona-role"><span class="lang-en">Chief AI Officer / Innovation Builder &mdash; uses the tools, sees the future, needs org adoption.</span><span class="lang-fr">Chief AI Officer / Innovation Builder &mdash; utilise les outils, voit le futur, a besoin de l'adoption org.</span><span class="lang-pl">Chief AI Officer / Innovation Builder &mdash; u&#x17C;ywa narz&#x119;dzi, widzi przysz&#x142;o&#x15B;&#x107;, potrzebuje adopcji w organizacji.</span></p>
+                <p class="persona-example">e.g. Steve Jabbitt / Orange</p>
+            </div>
+            <div class="persona-body">
+                <div class="persona-pain">
+                    <h4><span class="lang-en">Pain points</span><span class="lang-fr">Points de douleur</span><span class="lang-pl">Wyzwania</span></h4>
+                    <ul>
+                        <li><span class="lang-en">&ldquo;I see the future, I use the tools, but I can't get my teams to adopt them&rdquo;</span><span class="lang-fr">&ldquo;Je vois le futur, j'utilise les outils, mais je n'arrive pas &agrave; faire adopter par mes &eacute;quipes&rdquo;</span><span class="lang-pl">&ldquo;Widz&#x119; przysz&#x142;o&#x15B;&#x107;, u&#x17C;ywam narz&#x119;dzi, ale nie mog&#x119; przekona&#x107; moich zespo&#x142;&oacute;w&rdquo;</span></li>
+                        <li><span class="lang-en">&ldquo;I need someone who can run hands-on workshops, not PowerPoint training&rdquo;</span><span class="lang-fr">&ldquo;J'ai besoin de quelqu'un qui fait des ateliers pratiques, pas des formations PowerPoint&rdquo;</span><span class="lang-pl">&ldquo;Potrzebuj&#x119; kogo&#x15B;, kto poprowadzi warsztaty praktyczne, nie szkolenia PowerPointowe&rdquo;</span></li>
+                        <li><span class="lang-en">&ldquo;I need a force multiplier to spread AI across the org&rdquo;</span><span class="lang-fr">&ldquo;J'ai besoin d'un multiplicateur de force pour diffuser l'IA dans toute l'org&rdquo;</span><span class="lang-pl">&ldquo;Potrzebuj&#x119; mno&#x17C;nika si&#x142;y, &#x17C;eby rozprzestrzeni&#x107; AI w ca&#x142;ej organizacji&rdquo;</span></li>
+                    </ul>
+                </div>
+                <div class="persona-offer">
+                    <h4><span class="lang-en">What we deliver</span><span class="lang-fr">Ce que nous livrons</span><span class="lang-pl">Co dostarczamy</span></h4>
+                    <ul>
+                        <li><span class="lang-en">Hands-on workshops with AI coding tools (Claude Code, Cursor&hellip;)</span><span class="lang-fr">Ateliers pratiques avec les outils de coding IA (Claude Code, Cursor&hellip;)</span><span class="lang-pl">Warsztaty praktyczne z narz&#x119;dziami AI coding (Claude Code, Cursor&hellip;)</span></li>
+                        <li><span class="lang-en">Pair-building sessions on real team problems</span><span class="lang-fr">Sessions de pair-building sur les vrais probl&egrave;mes de l'&eacute;quipe</span><span class="lang-pl">Sesje pair-building na realnych problemach zespo&#x142;u</span></li>
+                        <li><span class="lang-en">Adoption program: CAIO vision &rarr; team enablement &rarr; autonomy</span><span class="lang-fr">Programme d'adoption : vision CAIO &rarr; enablement &eacute;quipe &rarr; autonomie</span><span class="lang-pl">Program adopcji: wizja CAIO &rarr; enablement zespo&#x142;u &rarr; autonomia</span></li>
+                        <li><span class="lang-en">Builder enablement &mdash; not theory, real use cases</span><span class="lang-fr">Builder enablement &mdash; pas de th&eacute;orie, des cas d'usage r&eacute;els</span><span class="lang-pl">Builder enablement &mdash; nie teoria, realne przypadki u&#x17C;ycia</span></li>
+                        <li><span class="lang-en">Video upskilling programs for distributed teams</span><span class="lang-fr">Programmes d'upskilling vid&eacute;o pour les &eacute;quipes distribu&eacute;es</span><span class="lang-pl">Programy upskillingu wideo dla rozproszonych zespo&#x142;&oacute;w</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- CMO -->
+        <div class="persona-card">
+            <div class="persona-sidebar">
+                <h3><span class="lang-en">CMO</span><span class="lang-fr">CMO</span><span class="lang-pl">CMO</span></h3>
+                <p class="persona-role"><span class="lang-en">Chief Marketing Officer &mdash; needs data-driven campaigns and marketing automation at scale.</span><span class="lang-fr">Chief Marketing Officer &mdash; a besoin de campagnes data-driven et d'automatisation marketing &agrave; l'&eacute;chelle.</span><span class="lang-pl">Chief Marketing Officer &mdash; potrzebuje kampanii opartych na danych i automatyzacji marketingu na skal&#x119;.</span></p>
+            </div>
+            <div class="persona-body">
+                <div class="persona-pain">
+                    <h4><span class="lang-en">Pain points</span><span class="lang-fr">Points de douleur</span><span class="lang-pl">Wyzwania</span></h4>
+                    <ul>
+                        <li><span class="lang-en">Data exists but campaigns launch too slowly</span><span class="lang-fr">Les donn&eacute;es existent mais les campagnes se lancent trop lentement</span><span class="lang-pl">Dane istniej&#x105;, ale kampanie startuj&#x105; zbyt wolno</span></li>
+                        <li><span class="lang-en">Marketing and data teams don't speak the same language</span><span class="lang-fr">Les &eacute;quipes marketing et data ne parlent pas la m&ecirc;me langue</span><span class="lang-pl">Zespo&#x142;y marketingu i danych nie m&oacute;wi&#x105; tym samym j&#x119;zykiem</span></li>
+                        <li><span class="lang-en">ROI on AI initiatives unclear to leadership</span><span class="lang-fr">Le ROI des initiatives IA peu clair pour la direction</span><span class="lang-pl">ROI inicjatyw AI niejasny dla kierownictwa</span></li>
+                    </ul>
+                </div>
+                <div class="persona-offer">
+                    <h4><span class="lang-en">What we deliver</span><span class="lang-fr">Ce que nous livrons</span><span class="lang-pl">Co dostarczamy</span></h4>
+                    <ul>
+                        <li><span class="lang-en">Campaigns that move at market speed &mdash; data to action in days</span><span class="lang-fr">Des campagnes au rythme du march&eacute; &mdash; de la donn&eacute;e &agrave; l'action en jours</span><span class="lang-pl">Kampanie w tempie rynku &mdash; od danych do dzia&#x142;ania w dni</span></li>
+                        <li><span class="lang-en">Unified marketing &amp; data stack</span><span class="lang-fr">Stack marketing &amp; data unifi&eacute;</span><span class="lang-pl">Zunifikowany stack marketingu i danych</span></li>
+                        <li><span class="lang-en">Dashboards that prove ROI to the board</span><span class="lang-fr">Des dashboards qui prouvent le ROI au board</span><span class="lang-pl">Dashboardy, kt&oacute;re udowadniaj&#x105; ROI zarz&#x105;dowi</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Group Exec -->
+        <div class="persona-card">
+            <div class="persona-sidebar">
+                <h3><span class="lang-en">Group Executive</span><span class="lang-fr">Dirigeant Groupe</span><span class="lang-pl">Dyrektor Grupy</span></h3>
+                <p class="persona-role"><span class="lang-en">C-suite / VP &mdash; sponsors AI transformation, accountable for competitive positioning.</span><span class="lang-fr">C-suite / VP &mdash; sponsor de la transformation IA, responsable du positionnement concurrentiel.</span><span class="lang-pl">C-suite / VP &mdash; sponsor transformacji AI, odpowiedzialny za pozycjonowanie konkurencyjne.</span></p>
+            </div>
+            <div class="persona-body">
+                <div class="persona-pain">
+                    <h4><span class="lang-en">Pain points</span><span class="lang-fr">Points de douleur</span><span class="lang-pl">Wyzwania</span></h4>
+                    <ul>
+                        <li><span class="lang-en">Competitors are moving faster on AI</span><span class="lang-fr">Les concurrents avancent plus vite sur l'IA</span><span class="lang-pl">Konkurencja jest szybsza w AI</span></li>
+                        <li><span class="lang-en">No clear AI strategy beyond &ldquo;innovation lab&rdquo;</span><span class="lang-fr">Pas de strat&eacute;gie IA claire au-del&agrave; du &ldquo;lab innovation&rdquo;</span><span class="lang-pl">Brak jasnej strategii AI poza &ldquo;laboratorium innowacji&rdquo;</span></li>
+                        <li><span class="lang-en">Teams not autonomous enough to sustain momentum</span><span class="lang-fr">Les &eacute;quipes pas assez autonomes pour maintenir la dynamique</span><span class="lang-pl">Zespo&#x142;y niewystarczaj&#x105;co autonomiczne, &#x17C;eby utrzyma&#x107; dynamik&#x119;</span></li>
+                    </ul>
+                </div>
+                <div class="persona-offer">
+                    <h4><span class="lang-en">What we deliver</span><span class="lang-fr">Ce que nous livrons</span><span class="lang-pl">Co dostarczamy</span></h4>
+                    <ul>
+                        <li><span class="lang-en">Strategic AI roadmap aligned to business goals</span><span class="lang-fr">Roadmap IA strat&eacute;gique align&eacute;e sur les objectifs business</span><span class="lang-pl">Strategiczna roadmapa AI dopasowana do cel&oacute;w biznesowych</span></li>
+                        <li><span class="lang-en">Scale from pilot to competitive edge</span><span class="lang-fr">Scaler du pilote &agrave; l'avantage concurrentiel</span><span class="lang-pl">Skalowanie od pilota&#x17C;u do przewagi konkurencyjnej</span></li>
+                        <li><span class="lang-en">Team autonomy &mdash; no long-term dependency</span><span class="lang-fr">Autonomie des &eacute;quipes &mdash; pas de d&eacute;pendance long terme</span><span class="lang-pl">Autonomia zespo&#x142;&oacute;w &mdash; bez d&#x142;ugoterminowej zale&#x17C;no&#x15B;ci</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Head Data -->
+        <div class="persona-card">
+            <div class="persona-sidebar">
+                <h3>Head of Data</h3>
+                <p class="persona-role"><span class="lang-en">Leads data team / datalab &mdash; produces insights but lacks bandwidth and business reach.</span><span class="lang-fr">Dirige l'&eacute;quipe data / datalab &mdash; produit des insights mais manque de bande passante et de reach business.</span><span class="lang-pl">Prowadzi zesp&oacute;&#x142; data / datalab &mdash; produkuje insighty, ale brakuje bandwidth i zasi&#x119;gu biznesowego.</span></p>
+            </div>
+            <div class="persona-body">
+                <div class="persona-pain">
+                    <h4><span class="lang-en">Pain points</span><span class="lang-fr">Points de douleur</span><span class="lang-pl">Wyzwania</span></h4>
+                    <ul>
+                        <li><span class="lang-en">Insights produced but never reach decision-makers</span><span class="lang-fr">Des insights produits qui n'atteignent jamais les d&eacute;cideurs</span><span class="lang-pl">Insighty produkowane, ale nigdy nie docieraj&#x105; do decydent&oacute;w</span></li>
+                        <li><span class="lang-en">Drowning in requests, no bandwidth for strategic work</span><span class="lang-fr">Noy&eacute; dans les demandes, pas de bande passante pour le travail strat&eacute;gique</span><span class="lang-pl">Zalany requestami, brak bandwidth na prac&#x119; strategiczn&#x105;</span></li>
+                        <li><span class="lang-en">Tools and stack not integrated end-to-end</span><span class="lang-fr">Outils et stack non int&eacute;gr&eacute;s de bout en bout</span><span class="lang-pl">Narz&#x119;dzia i stack niezintegrowane end-to-end</span></li>
+                    </ul>
+                </div>
+                <div class="persona-offer">
+                    <h4><span class="lang-en">What we deliver</span><span class="lang-fr">Ce que nous livrons</span><span class="lang-pl">Co dostarczamy</span></h4>
+                    <ul>
+                        <li><span class="lang-en">Data pipelines that feed directly into decisions</span><span class="lang-fr">Des pipelines data qui alimentent directement les d&eacute;cisions</span><span class="lang-pl">Pipeline'y danych zasilaj&#x105;ce bezpo&#x15B;rednio decyzje</span></li>
+                        <li><span class="lang-en">Automation of repetitive data tasks</span><span class="lang-fr">Automatisation des t&acirc;ches data r&eacute;p&eacute;titives</span><span class="lang-pl">Automatyzacja powtarzalnych zada&#x144; data</span></li>
+                        <li><span class="lang-en">Unified stack &mdash; every integration compounds</span><span class="lang-fr">Stack unifi&eacute; &mdash; chaque int&eacute;gration acc&eacute;l&egrave;re</span><span class="lang-pl">Zunifikowany stack &mdash; ka&#x17C;da integracja si&#x119; kumuluje</span></li>
+                        <li><span class="lang-en">Sourcing next-gen automation &amp; AI profiles for your teams</span><span class="lang-fr">Sourcing de profils automation &amp; IA next-gen pour vos &eacute;quipes</span><span class="lang-pl">Sourcing profili nowej generacji automation &amp; AI dla Twoich zespo&#x142;&oacute;w</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════ CTA ═══════ -->
+    <section class="section-cta">
+        <h2><span class="lang-en">The best next step is a conversation.</span><span class="lang-fr">La meilleure prochaine &eacute;tape, c'est une conversation.</span><span class="lang-pl">Najlepszy nast&#x119;pny krok to rozmowa.</span></h2>
+        <p class="contact-sub"><span class="lang-en">15 minutes to understand where you stand &mdash; and what you could build next.</span><span class="lang-fr">15 minutes pour comprendre o&ugrave; vous en &ecirc;tes &mdash; et ce que vous pourriez construire ensuite.</span><span class="lang-pl">15 minut, &#x17C;eby zrozumie&#x107;, gdzie jeste&#x15B; &mdash; i co mo&#x17C;esz zbudowa&#x107; dalej.</span></p>
+        <div class="contact-buttons">
+            <a href="https://wa.me/33784003518" target="_blank" class="btn-wa">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                WhatsApp
+            </a>
+            <a href="mailto:aleksander.dabrowski@gmail.com" class="btn-email">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4L12 13 2 4"/></svg>
+                Email
+            </a>
+        </div>
+    </section>
+
+    <script>
+    (function() {
+        var urlLang = new URLSearchParams(window.location.search).get('lang');
+        var saved = urlLang || localStorage.getItem('lang') || 'en';
+        if (urlLang) localStorage.setItem('lang', urlLang);
+        if (saved !== 'en') {
+            document.body.classList.add(saved);
+            document.querySelector('.lang-btn.active').classList.remove('active');
+            document.querySelector('.lang-btn[data-lang="' + saved + '"]').classList.add('active');
+        }
+        document.querySelectorAll('.lang-btn').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                var lang = this.dataset.lang;
+                document.body.classList.remove('fr', 'pl');
+                if (lang !== 'en') document.body.classList.add(lang);
+                document.querySelector('.lang-btn.active').classList.remove('active');
+                this.classList.add('active');
+                localStorage.setItem('lang', lang);
+            });
+        });
+    })();
+    </script>
+
+</body>
+</html>
