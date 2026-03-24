@@ -388,6 +388,89 @@
 
         .btn-email:hover { background: var(--color-black); color: var(--color-white); }
 
+        /* ─── STORY ─── */
+        .story-section {
+            background: var(--color-offwhite);
+            padding: 60px var(--gutter);
+        }
+
+        .story-inner {
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+
+        .story-section h2 {
+            font-family: var(--font-heading);
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .story-section .section-sub {
+            font-size: 0.85rem;
+            color: var(--color-light-gray);
+            margin-bottom: 32px;
+        }
+
+        .story-card {
+            background: var(--color-white);
+            border: 1px solid #ece9e4;
+            border-left: 4px solid var(--color-segment);
+            border-radius: 2px;
+            padding: 36px 40px;
+        }
+
+        .story-industry {
+            font-size: 0.6rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--color-segment);
+            margin-bottom: 12px;
+        }
+
+        .story-card h3 {
+            font-family: var(--font-heading);
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            line-height: 1.4;
+        }
+
+        .story-text {
+            font-size: 0.88rem;
+            font-weight: 300;
+            color: var(--color-gray);
+            line-height: 1.75;
+            margin-bottom: 24px;
+        }
+
+        .story-metrics {
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+            padding-top: 20px;
+            border-top: 1px solid #ece9e4;
+        }
+
+        .story-metric {
+            text-align: center;
+        }
+
+        .story-metric .metric-value {
+            font-family: var(--font-heading);
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--color-segment);
+            display: block;
+        }
+
+        .story-metric .metric-label {
+            font-size: 0.72rem;
+            font-weight: 300;
+            color: var(--color-light-gray);
+        }
+
         /* ─── RESPONSIVE ─── */
         @media (max-width: 900px) {
             .overview-grid { grid-template-columns: 1fr; }
@@ -396,6 +479,8 @@
             .persona-body { grid-template-columns: 1fr; }
             .persona-pain { border-right: none; border-bottom: 1px solid #ece9e4; }
             .solo-steps { grid-template-columns: 1fr; gap: 24px; }
+            .story-card { padding: 28px 24px; }
+            .story-metrics { gap: 24px; }
         }
     </style>
 </head>
@@ -673,6 +758,33 @@
                         <li><span class="lang-en">Only the signals relevant to your industry, delivered daily</span><span class="lang-fr">Uniquement les signaux pertinents pour votre industrie, livr&#233;s quotidiennement</span><span class="lang-pl">Tylko sygna&#322;y istotne dla Twojej bran&#380;y, dostarczane codziennie</span></li>
                         <li><span class="lang-en">A system you own — no algorithm deciding what you see</span><span class="lang-fr">Un syst&#232;me que vous poss&#233;dez — pas d'algorithme qui d&#233;cide ce que vous voyez</span><span class="lang-pl">System, kt&#243;ry posiadasz — &#380;aden algorytm nie decyduje co widzisz</span></li>
                     </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════ STORY ═══════ -->
+    <div class="story-section">
+        <div class="story-inner">
+            <h2><span class="lang-en">A real story</span><span class="lang-fr">Une histoire r&eacute;elle</span><span class="lang-pl">Prawdziwa historia</span></h2>
+            <p class="section-sub"><span class="lang-en">Built once, runs every day &mdash; how it actually works.</span><span class="lang-fr">Construit une fois, tourne chaque jour &mdash; comment &ccedil;a marche concr&egrave;tement.</span><span class="lang-pl">Zbudowane raz, dzia&#x142;a codziennie &mdash; jak to naprawd&#x119; dzia&#x142;a.</span></p>
+            <div class="story-card">
+                <div class="story-industry"><span class="lang-en">AI &amp; Automation &mdash; Automated Newsletter</span><span class="lang-fr">IA &amp; Automatisation &mdash; Newsletter Automatis&eacute;e</span><span class="lang-pl">AI &amp; Automatyzacja &mdash; Zautomatyzowany Newsletter</span></div>
+                <h3><span class="lang-en">An AI-powered newsletter system that saves 4 days per month</span><span class="lang-fr">Un syst&egrave;me de newsletter propuls&eacute; par l'IA qui &eacute;conomise 4 jours par mois</span><span class="lang-pl">System newsletterowy napedzany AI oszcz&#x119;dzaj&#x105;cy 4 dni miesi&#x119;cznie</span></h3>
+                <p class="story-text"><span class="lang-en">I built an automated newsletter system powered by AI and LLM technology that analyzes 3,000 information points per month &mdash; articles, videos, industry signals. The system selects the most relevant content from specific keywords and sources, presented by a digital avatar. Only 1 hour per week is needed to adjust the content. The result: 4 days saved per month on information consumption and domain learning. The system is now also used by the sales team to identify and contact prospects interested in specific topics covered in the newsletter &mdash; turning content into conversations.</span><span class="lang-fr">J'ai d&eacute;velopp&eacute; un syst&egrave;me de newsletter automatis&eacute;e propuls&eacute; par l'IA et les LLM qui analyse 3 000 points d'information par mois &mdash; articles, vid&eacute;os, signaux sectoriels. Le syst&egrave;me s&eacute;lectionne le contenu le plus pertinent &agrave; partir de mots-cl&eacute;s et sources sp&eacute;cifiques, pr&eacute;sent&eacute; par un avatar num&eacute;rique. Seulement 1 heure par semaine suffit pour ajuster le contenu. R&eacute;sultat : 4 jours &eacute;conomis&eacute;s par mois sur la consommation d'information et l'apprentissage sectoriel. Le syst&egrave;me est d&eacute;sormais utilis&eacute; par l'&eacute;quipe commerciale pour identifier et contacter les prospects int&eacute;ress&eacute;s par des th&eacute;matiques sp&eacute;cifiques de la newsletter &mdash; transformant le contenu en conversations.</span><span class="lang-pl">Zbudowa&#x142;em zautomatyzowany system newsletterowy napedzany AI i technologi&#x105; LLM, kt&oacute;ry analizuje 3 000 punkt&oacute;w informacyjnych miesi&#x119;cznie &mdash; artyku&#x142;y, wideo, sygna&#x142;y bran&#x17C;owe. System wybiera najistotniejsze tre&#x15B;ci na podstawie s&#x142;&oacute;w kluczowych i &#x17A;r&oacute;de&#x142;, prezentowane przez cyfrowego awatara. Wystarczy 1 godzina tygodniowo na dostosowanie tre&#x15B;ci. Rezultat: 4 dni zaoszcz&#x119;dzone miesi&#x119;cznie na konsumpcji informacji i nauce domenowej. System jest teraz wykorzystywany r&oacute;wnie&#x17C; przez zesp&oacute;&#x142; handlowy do identyfikacji i kontaktowania prospekt&oacute;w zainteresowanych konkretnymi tematami newslettera &mdash; zamieniaj&#x105;c content w rozmowy.</span></p>
+                <div class="story-metrics">
+                    <div class="story-metric">
+                        <span class="metric-value">3 000</span>
+                        <span class="metric-label"><span class="lang-en">info points/month</span><span class="lang-fr">points d'info/mois</span><span class="lang-pl">punkt&oacute;w info/mies</span></span>
+                    </div>
+                    <div class="story-metric">
+                        <span class="metric-value">4<span style="font-size:0.8em"><span class="lang-en">d</span><span class="lang-fr">j</span><span class="lang-pl">d</span></span>/<span class="lang-en">month</span><span class="lang-fr">mois</span><span class="lang-pl">mies</span></span>
+                        <span class="metric-label"><span class="lang-en">saved</span><span class="lang-fr">&eacute;conomis&eacute;s</span><span class="lang-pl">zaoszcz&#x119;dzone</span></span>
+                    </div>
+                    <div class="story-metric">
+                        <span class="metric-value">1h/<span class="lang-en">week</span><span class="lang-fr">sem</span><span class="lang-pl">tydz</span></span>
+                        <span class="metric-label"><span class="lang-en">maintenance</span><span class="lang-fr">maintenance</span><span class="lang-pl">obs&#x142;uga</span></span>
+                    </div>
                 </div>
             </div>
         </div>
